@@ -15,13 +15,11 @@ export default function AboutUs() {
             <div className="flex flex-col items-center lg:items-start gap-6">
               {/* Avatar — TODO: reemplazar con foto real */}
               <div className="relative">
-                <div
-                  className="w-36 h-36 rounded-2xl flex items-center justify-center text-white text-5xl font-extrabold"
-                  style={{ background: 'linear-gradient(135deg, #7C3AED, #06B6D4)' }}
-                >
-                  {/* TODO: reemplazar con <img src="/foto.jpg" alt="Vicente Torres" className="w-36 h-36 rounded-2xl object-cover" /> */}
-                  VT
-                </div>
+                <img
+                  src="/vicente.png"
+                  alt="Vicente Torres G."
+                  className="w-36 h-36 rounded-2xl object-cover object-top"
+                />
                 {/* Verified badge */}
                 <div className="absolute -bottom-3 -right-3 w-10 h-10 rounded-full gradient-bg flex items-center justify-center shadow-glow-purple">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="white">
