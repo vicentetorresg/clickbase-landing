@@ -85,7 +85,6 @@ function Footer() {
                 'Meta Ads (Facebook & Instagram)',
                 'Google Tag Manager',
                 'Meta Pixel',
-                'Google Analytics 4',
               ].map((service) => (
                 <li key={service}>
                   <span className="text-sm text-slate-400 flex items-start gap-2">
