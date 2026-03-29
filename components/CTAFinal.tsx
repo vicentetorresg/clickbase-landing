@@ -33,13 +33,21 @@ export default function CTAFinal() {
     setFormData((prev) => ({ ...prev, [name]: value }))
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pushEvent = (event: Record<string, any>) => {
+    if (typeof window !== 'undefined') {
+      ;(window as any).dataLayer = (window as any).dataLayer || []
+      ;(window as any).dataLayer.push(event)
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setLoading(true)
     setError(null)
 
-    // GTM: dataLayer.push({ event: 'form_submit', form_location: 'cta_final' })
-    // Meta Pixel: fbq('track', 'Lead')
+    // Disparar evento de intento de envío
+    pushEvent({ event: 'form_submit_attempt', form_location: 'cta_final' })
 
     try {
       const res = await fetch('/api/submit', {
@@ -53,6 +61,13 @@ export default function CTAFinal() {
       if (!result.success) {
         throw new Error(result.error || 'Error al enviar')
       }
+
+      // ✅ Evento principal de conversión — úsalo en GTM como activador
+      pushEvent({
+        event: 'lead_generado',
+        form_location: 'cta_final',
+        rubro: formData.rubro,
+      })
 
       setSubmitted(true)
       setFormData(initialFormData)
@@ -103,9 +118,7 @@ export default function CTAFinal() {
               href="https://wa.me/56994366697?text=Hola%2C%20quiero%20cotizar%20la%20p%C3%A1gina%20web%20%2B%20campa%C3%B1a%20%2B%20tracking.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => {
-                // GTM: dataLayer.push({ event: 'whatsapp_click', location: 'cta_final' })
-              }}
+              onClick={() => pushEvent({ event: 'whatsapp_click', location: 'cta_final' })}
               className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-7 py-4 rounded-xl transition-all duration-200 text-base mb-8 w-full sm:w-auto justify-center sm:justify-start"
               style={{ boxShadow: '0 0 20px rgba(37, 211, 102, 0.2)' }}
             >
@@ -289,10 +302,7 @@ export default function CTAFinal() {
                   <button
                     type="submit"
                     disabled={loading}
-                    onClick={() => {
-                      // GTM: dataLayer.push({ event: 'form_submit_attempt', form_location: 'cta_final' })
-                      // Meta Pixel (on success): fbq('track', 'Lead')
-                    }}
+                    onClick={() => pushEvent({ event: 'cta_submit_click', location: 'form' })}
                     className={`w-full gradient-bg text-white font-bold py-4 px-8 rounded-xl text-base mt-6 transition-all duration-200 flex items-center justify-center gap-2 ${
                       loading
                         ? 'opacity-70 cursor-not-allowed'

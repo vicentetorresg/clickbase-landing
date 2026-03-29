@@ -13,14 +13,22 @@ export default function StickyMobileCTA() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const pushEvent = (event: Record<string, any>) => {
+    if (typeof window !== 'undefined') {
+      ;(window as any).dataLayer = (window as any).dataLayer || []
+      ;(window as any).dataLayer.push(event)
+    }
+  }
+
   const handleCotizarClick = () => {
-    // GTM: dataLayer.push({ event: 'sticky_cta_click', cta_label: 'cotizar' })
+    pushEvent({ event: 'whatsapp_click', location: 'sticky_mobile' })
     const el = document.getElementById('contacto')
     if (el) el.scrollIntoView({ behavior: 'smooth' })
   }
 
   const handleWhatsAppClick = () => {
-    // GTM: dataLayer.push({ event: 'sticky_cta_click', cta_label: 'whatsapp' })
+    pushEvent({ event: 'whatsapp_click', location: 'sticky_mobile' })
   }
 
   return (
