@@ -59,7 +59,11 @@ export default function CotizadorPage() {
   const [urlGenerada, setUrlGenerada] = useState('')
   const [copiado, setCopiado] = useState(false)
   const [guardando, setGuardando] = useState(false)
+  const [enviandoEmail, setEnviandoEmail] = useState(false)
+  const [emailEnviado, setEmailEnviado] = useState(false)
+  const [slugGuardado, setSlugGuardado] = useState('')
   const [errorGuardar, setErrorGuardar] = useState('')
+  const [errorEmail, setErrorEmail] = useState('')
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -127,28 +131,40 @@ export default function CotizadorPage() {
     }
 
     const url = `${window.location.origin}/cotizacion/${slug}`
-
-    // Enviar email si hay correo
-    if (correo) {
-      await fetch('/api/send-cotizacion', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          slug,
-          nombre_cliente: nombre,
-          email_cliente: correo,
-          servicios: serviciosSeleccionados,
-          descuento,
-          mensaje_personal: mensajePersonal,
-          vigencia,
-          total_unico: totalUnicoFinal,
-          total_mensual: totalMensualFinal,
-        }),
-      })
-    }
-
+    setSlugGuardado(slug)
     setUrlGenerada(url)
+    setEmailEnviado(false)
     setGuardando(false)
+  }
+
+  const enviarEmail = async () => {
+    if (!correo || !slugGuardado) return
+    setEnviandoEmail(true)
+    setErrorEmail('')
+
+    const res = await fetch('/api/send-cotizacion', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        slug: slugGuardado,
+        nombre_cliente: nombre,
+        email_cliente: correo,
+        servicios: serviciosSeleccionados,
+        descuento,
+        mensaje_personal: mensajePersonal,
+        vigencia,
+        total_unico: totalUnicoFinal,
+        total_mensual: totalMensualFinal,
+      }),
+    })
+
+    const result = await res.json()
+    if (!result.success) {
+      setErrorEmail('Error al enviar: ' + (result.error || 'intenta de nuevo'))
+    } else {
+      setEmailEnviado(true)
+    }
+    setEnviandoEmail(false)
   }
 
   const copiarUrl = () => {
@@ -405,26 +421,67 @@ export default function CotizadorPage() {
               )}
             </div>
 
-            <button
-              type="button"
-              onClick={generarUrl}
-              disabled={!nombre || serviciosSeleccionados.length === 0 || guardando}
-              className={`w-full gradient-bg text-white font-bold py-4 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
-                !nombre || serviciosSeleccionados.length === 0 || guardando
-                  ? 'opacity-40 cursor-not-allowed'
-                  : 'hover:opacity-90 hover:shadow-glow-purple'
-              }`}
-            >
-              {guardando ? (
-                <>
-                  <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
-                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
-                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
-                  </svg>
-                  Guardando...
-                </>
-              ) : 'Generar URL de cotización →'}
-            </button>
+            <div className="flex flex-col gap-3">
+              {/* Generar URL */}
+              <button
+                type="button"
+                onClick={generarUrl}
+                disabled={!nombre || serviciosSeleccionados.length === 0 || guardando}
+                className={`w-full gradient-bg text-white font-bold py-4 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
+                  !nombre || serviciosSeleccionados.length === 0 || guardando
+                    ? 'opacity-40 cursor-not-allowed'
+                    : 'hover:opacity-90 hover:shadow-glow-purple'
+                }`}
+              >
+                {guardando ? (
+                  <>
+                    <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                    </svg>
+                    Guardando...
+                  </>
+                ) : (
+                  <>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>
+                    </svg>
+                    Generar URL
+                  </>
+                )}
+              </button>
+
+              {/* Enviar por email */}
+              <button
+                type="button"
+                onClick={enviarEmail}
+                disabled={!urlGenerada || !correo || enviandoEmail || emailEnviado}
+                className={`w-full border font-bold py-4 rounded-xl text-sm transition-all duration-200 flex items-center justify-center gap-2 ${
+                  !urlGenerada || !correo || enviandoEmail || emailEnviado
+                    ? 'opacity-40 cursor-not-allowed border-slate-700 text-slate-500'
+                    : 'border-brand-cyan text-brand-cyan hover:bg-brand-cyan/10'
+                }`}
+              >
+                {enviandoEmail ? (
+                  <>
+                    <svg className="animate-spin w-4 h-4" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"/>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/>
+                    </svg>
+                    Enviando...
+                  </>
+                ) : emailEnviado ? (
+                  '✓ Email enviado'
+                ) : (
+                  <>
+                    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Enviar por email{!correo ? ' (sin correo)' : correo ? ` → ${correo}` : ''}
+                  </>
+                )}
+              </button>
+            </div>
 
             {errorGuardar && (
               <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-sm text-red-400">
@@ -432,9 +489,17 @@ export default function CotizadorPage() {
               </div>
             )}
 
+            {errorEmail && (
+              <div className="p-3 bg-red-500/10 border border-red-500/30 rounded-xl text-sm text-red-400">
+                ⚠️ {errorEmail}
+              </div>
+            )}
+
             {urlGenerada && (
               <div className="card-dark rounded-2xl p-5 space-y-3">
-                <p className="text-sm font-semibold text-white">✓ Cotización guardada{correo ? ' · Email enviado' : ''}</p>
+                <p className="text-sm font-semibold text-white">
+                  ✓ Cotización guardada{emailEnviado ? ' · Email enviado' : ''}
+                </p>
                 <div className="bg-dark rounded-xl p-3 border border-slate-700 break-all text-xs text-slate-400 font-mono">
                   {urlGenerada}
                 </div>
