@@ -3,7 +3,6 @@
 import { useState } from 'react'
 
 const WA_LINK = 'https://wa.me/56994366697?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20cotizar%20el%20setup%20web%20%2B%20campa%C3%B1a.%20%C2%BFTienen%20cupos%20disponibles%3F'
-const COTIZADOR_LINK = '/cotizador'
 
 function CTAButton({ text = 'Quiero mi setup ahora', size = 'lg', full = false }: { text?: string; size?: 'lg' | 'xl'; full?: boolean }) {
   return (
@@ -153,7 +152,7 @@ export default function Embudo1() {
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        ⚡ Solo <strong>3 cupos disponibles en abril</strong> — Setup completo desde $699.990 + IVA
+        ⚡ Setup completo desde <strong>$699.990 + IVA</strong> — Página + campaña + tracking listo en 7 días
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -181,9 +180,6 @@ export default function Embudo1() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
             <CTAButton text="Quiero cotizar mi setup" size="xl" />
-            <a href={COTIZADOR_LINK} className="text-sm text-slate-400 hover:text-white underline underline-offset-4 transition-colors duration-200">
-              Ver precios →
-            </a>
           </div>
 
           {/* Trust pills */}
@@ -586,7 +582,7 @@ export default function Embudo1() {
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-purple/40 bg-brand-purple/10 text-sm font-medium text-brand-purple-light mb-8">
             <span className="w-2 h-2 rounded-full bg-success animate-pulse inline-block" />
-            Solo 3 cupos disponibles en abril
+            Disponibilidad limitada — Consulta antes de que se llene
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -600,9 +596,6 @@ export default function Embudo1() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <CTAButton text="Quiero empezar ahora" size="xl" />
-            <a href={COTIZADOR_LINK} className="border border-slate-600 text-white font-semibold px-8 py-4 rounded-2xl text-base hover:border-slate-400 hover:bg-white/5 transition-all duration-200">
-              Ver cotizador →
-            </a>
           </div>
 
           <p className="text-slate-500 text-sm">

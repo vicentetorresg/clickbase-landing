@@ -3,7 +3,6 @@
 import { useState } from 'react'
 
 const WA_LINK = 'https://wa.me/56994366697?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20entender%20por%20qu%C3%A9%20mis%20ads%20no%20funcionan.%20%C2%BFPueden%20ayudarme%3F'
-const COTIZADOR_LINK = '/cotizador'
 
 function CTAButton({ text = 'Diagnosticar mi campaña gratis', size = 'lg', full = false }: { text?: string; size?: 'lg' | 'xl'; full?: boolean }) {
   return (
@@ -166,7 +165,7 @@ export default function Embudo2() {
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        🔥 Auditoría de campaña <strong>gratuita</strong> — Solo para los próximos 5 negocios que escriban esta semana
+        🔥 Auditoría de campaña <strong>gratuita</strong> — Diagnóstico sin costo para los negocios que escriban hoy
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -194,9 +193,6 @@ export default function Embudo2() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
             <CTAButton text="Diagnosticar mi campaña gratis" size="xl" />
-            <a href={COTIZADOR_LINK} className="text-sm text-slate-400 hover:text-white underline underline-offset-4 transition-colors duration-200">
-              Ver precios →
-            </a>
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
@@ -597,9 +593,6 @@ export default function Embudo2() {
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <CTAButton text="Diagnosticar mi campaña ahora" size="xl" />
-            <a href={COTIZADOR_LINK} className="border border-slate-600 text-white font-semibold px-8 py-4 rounded-2xl text-base hover:border-slate-400 hover:bg-white/5 transition-all duration-200">
-              Ver cotizador →
-            </a>
           </div>
 
           <p className="text-slate-500 text-sm">
