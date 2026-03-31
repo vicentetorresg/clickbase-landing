@@ -517,7 +517,21 @@ export default function Embudo1() {
             </div>
           </div>
 
-          <p className="text-center text-slate-500 text-xs mt-6">
+          {/* No somos masivos */}
+          <div className="mt-6 max-w-2xl mx-auto">
+            <div className="flex items-start gap-4 bg-brand-purple/10 border border-brand-purple/30 rounded-xl px-5 py-5">
+              <span className="text-2xl flex-shrink-0 mt-0.5">🎯</span>
+              <div>
+                <p className="text-sm font-semibold text-white mb-1">No somos una agencia masiva</p>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Trabajamos con pocos clientes a la vez para que cada proyecto tenga atención directa, sin intermediarios.
+                  Nosotros mismos ejecutamos tu web y tu campaña, por eso limitamos a 10 proyectos por mes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-center text-slate-500 text-xs mt-4">
             * Valores no incluyen IVA. La inversión en publicidad (Google/Meta) se paga directamente a las plataformas.
           </p>
         </div>
