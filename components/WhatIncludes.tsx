@@ -53,6 +53,7 @@ export default function WhatIncludes() {
           <span className="section-label">Qué incluye</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 max-w-2xl mx-auto leading-tight">
             Todo lo que entra en el setup de{' '}
+            <span className="line-through text-slate-300 font-medium">$999.990</span>{' '}
             <span className="gradient-text">$699.990 + IVA</span>
           </h2>
           <p className="text-lg text-slate-400 max-w-xl mx-auto">
@@ -79,6 +80,10 @@ export default function WhatIncludes() {
           <div className="inline-flex flex-col sm:flex-row items-center gap-4 gradient-border rounded-2xl px-8 py-6">
             <div>
               <p className="text-sm text-slate-400 mb-1">Todo lo anterior por</p>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-base text-slate-300 line-through font-medium">$999.990</span>
+                <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
+              </div>
               <p className="text-4xl font-extrabold text-white">
                 $699.990
                 <span className="text-xl font-normal text-slate-400"> + IVA</span>
@@ -107,10 +112,17 @@ export default function WhatIncludes() {
         {/* CTA */}
         <div className="text-center mt-10">
           <a
-            href="#contacto"
-            className="inline-flex items-center gap-2 gradient-bg text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 hover:shadow-glow-purple"
+            href="https://wa.me/56994366697?text=Hola%2C%20quiero%20cotizar%20la%20p%C3%A1gina%20web%20%2B%20campa%C3%B1a%20%2B%20tracking.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-8 py-4 rounded-xl text-base transition-all duration-200"
+            style={{ boxShadow: '0 0 20px rgba(37, 211, 102, 0.25)' }}
           >
-            Quiero cotizar el setup completo →
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
+            </svg>
+            Cotizar por WhatsApp
           </a>
         </div>
       </div>

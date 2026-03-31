@@ -78,6 +78,12 @@ export default function Hero() {
               </a>
             </div>
 
+            {/* Scarcity */}
+            <div className="flex items-center gap-1.5 mb-4">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block flex-shrink-0" />
+              <span className="text-xs text-amber-400 font-medium">Solo 10 cupos disponibles este mes</span>
+            </div>
+
             {/* Price pills */}
             <div className="flex flex-wrap gap-3">
               <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-card border border-slate-700 text-sm text-slate-300">
