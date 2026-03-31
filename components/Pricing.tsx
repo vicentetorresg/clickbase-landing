@@ -174,6 +174,16 @@ export default function Pricing() {
                   <span className="text-slate-400 text-sm">{plan.priceSuffix}</span>
                 </div>
               </div>
+              {plan.badgeType === 'one-time' && (
+                <div className="flex items-center gap-3 mb-3 mt-1 bg-white/5 border border-white/10 rounded-xl px-3 py-2.5">
+                  <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
+                  <p className="text-xs text-white leading-tight">
+                    Hasta <span className="font-semibold">3 cuotas sin interés</span>
+                    <br />
+                    <span className="text-white/70">desde </span><span className="text-white font-bold">$233.330</span><span className="text-white/70"> / cuota</span>
+                  </p>
+                </div>
+              )}
               <p className="text-sm text-slate-400 mb-4">{plan.subtitle}</p>
               {plan.cupos && (
                 <div className="flex items-center gap-1.5 mb-6">

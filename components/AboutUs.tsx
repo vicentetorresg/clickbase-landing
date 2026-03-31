@@ -38,13 +38,13 @@ export default function AboutUs() {
               {/* Quick stats */}
               <div className="flex gap-6">
                 <div className="text-center">
-                  <p className="text-2xl font-extrabold text-white">+500</p>
-                  <p className="text-xs text-slate-500">contactos</p>
+                  <p className="text-2xl font-extrabold text-white">+3.000</p>
+                  <p className="text-xs text-slate-500">contactos LinkedIn</p>
                 </div>
                 <div className="w-px bg-white/10" />
                 <div className="text-center">
-                  <p className="text-2xl font-extrabold text-white">+150</p>
-                  <p className="text-xs text-slate-500">proyectos</p>
+                  <p className="text-2xl font-extrabold text-white">+100</p>
+                  <p className="text-xs text-slate-500">clientes</p>
                 </div>
                 <div className="w-px bg-white/10" />
                 <div className="text-center">

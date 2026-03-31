@@ -27,7 +27,7 @@ export default function AboutPreview() {
               <span className="text-slate-400 font-normal"> · CEO @ Proppi, fundador de ClickBase</span>
             </p>
             <p className="text-slate-500 text-sm mt-1">
-              Ing. Civil Industrial PUC · Experto en Paid Media · +150 proyectos configurados
+              Ing. Civil Industrial PUC · Experto en Paid Media · +100 clientes
             </p>
           </div>
 
