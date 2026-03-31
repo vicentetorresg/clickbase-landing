@@ -165,10 +165,10 @@ export default function CotizacionPage({ params }: { params: { slug: string } })
                 </div>
                 <div className="text-right flex-shrink-0">
                   {s.precioOriginal && (
-                    <div className="text-xs text-slate-600 line-through">{fmt(s.precioOriginal)}</div>
+                    <div className="text-sm text-slate-300 line-through">{fmt(s.precioOriginal)}</div>
                   )}
                   {!s.precioOriginal && (s.tipo === 'one-time' ? descuentoUnico : descuentoMensual) > 0 && (
-                    <div className="text-xs text-slate-600 line-through">{fmt(s.precio)}</div>
+                    <div className="text-sm text-slate-300 line-through">{fmt(s.precio)}</div>
                   )}
                   <span className="text-xl font-extrabold text-white">
                     {fmt(Math.round(s.precio * (1 - (s.tipo === 'one-time' ? descuentoUnico : descuentoMensual) / 100)))}
@@ -198,7 +198,7 @@ export default function CotizacionPage({ params }: { params: { slug: string } })
               <div className="flex justify-between items-center">
                 <span className="text-slate-400 text-sm">Pago único (setup)</span>
                 <div className="text-right">
-                  <div className="text-xs text-slate-600 line-through">
+                  <div className="text-sm text-slate-300 line-through">
                     {fmt(unicos.reduce((a, s) => a + (s.precioOriginal ?? s.precio), 0))} + IVA
                   </div>
                   <span className="text-2xl font-extrabold text-white">{fmt(data.total_unico)}</span>
@@ -211,7 +211,7 @@ export default function CotizacionPage({ params }: { params: { slug: string } })
                 <span className="text-slate-400 text-sm">Mantención mensual</span>
                 <div className="text-right">
                   {descuentoMensual > 0 && (
-                    <div className="text-xs text-slate-600 line-through">
+                    <div className="text-sm text-slate-300 line-through">
                       {fmt(mensuales.reduce((a, s) => a + s.precio, 0))} + IVA/mes
                     </div>
                   )}

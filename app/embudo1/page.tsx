@@ -152,7 +152,7 @@ export default function Embudo1() {
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        ⚡ Setup completo: <span className="line-through opacity-60 mx-1">$999.990</span><strong>$699.990 + IVA</strong> — Página + campaña + tracking listo en 7 días
+        ⚡ Setup completo: <span className="line-through opacity-80 mx-1">$999.990</span><strong>$699.990 + IVA</strong> — Página + campaña + tracking listo en 7 días
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -316,7 +316,7 @@ export default function Embudo1() {
           <div className="text-center p-6 rounded-2xl bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 border border-brand-purple/30">
             <div className="flex items-center justify-center gap-2 flex-wrap mb-1">
               <span className="text-2xl font-extrabold text-white">Todo esto:</span>
-              <span className="text-lg text-slate-500 line-through">$999.990</span>
+              <span className="text-xl text-slate-300 line-through font-medium">$999.990</span>
               <span className="text-2xl font-extrabold gradient-text">$699.990 + IVA</span>
               <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
             </div>
@@ -475,7 +475,7 @@ export default function Embudo1() {
               <div className="absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full gradient-bg text-white">Más popular</div>
               <p className="text-slate-400 text-sm mb-2">Setup único</p>
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-sm text-slate-500 line-through">$999.990</span>
+                <span className="text-base text-slate-300 line-through font-medium">$999.990</span>
                 <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
               </div>
               <p className="text-4xl font-extrabold text-white mb-1">$699.990</p>

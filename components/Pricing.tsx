@@ -161,7 +161,7 @@ export default function Pricing() {
               <div className="mb-2">
                 {plan.originalPrice && (
                   <div className="flex items-center gap-2 mb-1">
-                    <span className="text-sm text-slate-500 line-through">{plan.originalPrice}</span>
+                    <span className="text-base text-slate-300 line-through">{plan.originalPrice}</span>
                     <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">
                       −{plan.discountPct}%
                     </span>
