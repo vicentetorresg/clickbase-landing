@@ -147,46 +147,57 @@ export async function POST(req: Request) {
     <div style="background:#12122A;border:1px solid rgba(124,58,237,0.3);border-radius:12px;padding:20px 24px;margin-bottom:24px;">
       <h2 style="font-size:15px;font-weight:700;color:#fff;margin:0 0 16px 0;">Resumen de inversión</h2>
 
+      <table style="width:100%;border-collapse:collapse;">
       ${total_unico > 0 ? (() => {
         const precioOriginalUnico = serviciosDetalle.filter(s=>s.tipo==='Pago único').reduce((a,s)=>a+(s.precioLista??s.precio),0)
         const ahorroUnico = precioOriginalUnico - total_unico
         return `
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-        <div>
-          <div style="font-size:13px;color:#94a3b8;margin-bottom:2px;">Pago único (setup)</div>
-          <div style="font-size:14px;color:#94a3b8;text-decoration:line-through;font-weight:500;">${fmt(precioOriginalUnico)} + IVA</div>
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:22px;font-weight:800;color:#fff;">${fmt(total_unico)} <span style="font-size:12px;color:#64748b;font-weight:400;">+ IVA</span></div>
-          ${desc > 0 ? `<div style="font-size:12px;font-weight:700;color:#4ade80;">Ahorras ${fmt(ahorroUnico)}</div>` : ''}
-        </div>
-      </div>`
+        <tr>
+          <td style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top;">
+            <div style="font-size:13px;color:#94a3b8;margin-bottom:4px;">Pago único (setup)</div>
+            <div style="font-size:14px;color:#94a3b8;text-decoration:line-through;font-weight:500;">${fmt(precioOriginalUnico)} + IVA</div>
+          </td>
+          <td style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;vertical-align:top;white-space:nowrap;">
+            <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.2;">${fmt(total_unico)}</div>
+            <div style="font-size:12px;color:#64748b;">+ IVA</div>
+            ${desc > 0 ? `<div style="font-size:12px;font-weight:700;color:#4ade80;margin-top:2px;">Ahorras ${fmt(ahorroUnico)}</div>` : ''}
+          </td>
+        </tr>`
       })() : ''}
-
       ${total_mensual > 0 ? (() => {
         const precioOriginalMensual = serviciosDetalle.filter(s=>s.tipo==='Mensual').reduce((a,s)=>a+s.precio,0)
         const ahorroMensual = precioOriginalMensual - total_mensual
         return `
-      <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
-        <div>
-          <div style="font-size:13px;color:#94a3b8;margin-bottom:2px;">Mantención mensual</div>
-          ${desc > 0 ? `<div style="font-size:14px;color:#94a3b8;text-decoration:line-through;font-weight:500;">${fmt(precioOriginalMensual)} + IVA/mes</div>` : ''}
-        </div>
-        <div style="text-align:right;">
-          <div style="font-size:22px;font-weight:800;color:#fff;">${fmt(total_mensual)} <span style="font-size:12px;color:#64748b;font-weight:400;">+ IVA / mes</span></div>
-          ${desc > 0 ? `<div style="font-size:12px;font-weight:700;color:#4ade80;">Ahorras ${fmt(ahorroMensual)}/mes</div>` : ''}
-        </div>
-      </div>`
+        <tr>
+          <td style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);vertical-align:top;">
+            <div style="font-size:13px;color:#94a3b8;margin-bottom:4px;">Mantención mensual</div>
+            ${desc > 0 ? `<div style="font-size:14px;color:#94a3b8;text-decoration:line-through;font-weight:500;">${fmt(precioOriginalMensual)} + IVA/mes</div>` : ''}
+          </td>
+          <td style="padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);text-align:right;vertical-align:top;white-space:nowrap;">
+            <div style="font-size:22px;font-weight:800;color:#fff;line-height:1.2;">${fmt(total_mensual)}</div>
+            <div style="font-size:12px;color:#64748b;">+ IVA / mes</div>
+            ${desc > 0 ? `<div style="font-size:12px;font-weight:700;color:#4ade80;margin-top:2px;">Ahorras ${fmt(ahorroMensual)}/mes</div>` : ''}
+          </td>
+        </tr>`
       })() : ''}
+      </table>
 
       ${desc > 0 ? `
-      <div style="background:linear-gradient(135deg,rgba(74,222,128,0.12),rgba(74,222,128,0.06));border:1.5px solid rgba(74,222,128,0.4);border-radius:10px;padding:14px 16px;margin-top:14px;display:flex;align-items:center;gap:12px;">
-        <div style="font-size:28px;line-height:1;">🎁</div>
-        <div>
-          <div style="font-size:15px;font-weight:800;color:#4ade80;">¡${desc}% de descuento aplicado!</div>
-          <div style="font-size:12px;color:#86efac;margin-top:2px;">Precio especial para tu cotización — válido según fecha indicada.</div>
-        </div>
-      </div>` : ''}
+      <table style="width:100%;border-collapse:collapse;margin-top:14px;">
+        <tr>
+          <td style="background:rgba(74,222,128,0.08);border:1.5px solid rgba(74,222,128,0.4);border-radius:10px;padding:14px 16px;">
+            <table style="border-collapse:collapse;width:100%;">
+              <tr>
+                <td style="vertical-align:middle;width:36px;font-size:26px;line-height:1;padding-right:12px;">🎁</td>
+                <td style="vertical-align:middle;">
+                  <div style="font-size:15px;font-weight:800;color:#4ade80;">¡${desc}% de descuento aplicado!</div>
+                  <div style="font-size:12px;color:#86efac;margin-top:3px;">Precio especial para tu cotización — válido según fecha indicada.</div>
+                </td>
+              </tr>
+            </table>
+          </td>
+        </tr>
+      </table>` : ''}
 
       <p style="font-size:11px;color:#374151;margin:14px 0 0 0;">Los valores no incluyen IVA. La inversión publicitaria (Google/Meta) se paga directamente a las plataformas.</p>
     </div>
