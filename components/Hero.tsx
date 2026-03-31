@@ -80,9 +80,11 @@ export default function Hero() {
 
             {/* Price pills */}
             <div className="flex flex-wrap gap-3">
-              <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-dark-card border border-slate-700 text-sm text-slate-300">
-                <span className="w-2 h-2 rounded-full bg-success inline-block" />
-                Setup: $699.990 + IVA
+              <span className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-dark-card border border-slate-700 text-sm text-slate-300">
+                <span className="w-2 h-2 rounded-full bg-success inline-block flex-shrink-0" />
+                Setup: <span className="line-through text-slate-500">$999.990</span>
+                <span className="font-semibold text-white">$699.990</span>
+                <span className="text-xs font-bold text-success bg-success/10 border border-success/20 rounded-full px-1.5 py-0.5">−30%</span>
               </span>
               <span className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-dark-card border border-slate-700 text-sm text-slate-300">
                 <span className="w-2 h-2 rounded-full bg-brand-cyan inline-block" />

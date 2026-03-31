@@ -10,6 +10,9 @@ type Plan = {
   badgeType: 'one-time' | 'monthly'
   name: string
   price: string
+  originalPrice?: string
+  discountPct?: number
+  cupos?: number
   priceSuffix: string
   subtitle: string
   disclaimer?: string
@@ -27,6 +30,9 @@ const plans: Plan[] = [
     badgeType: 'one-time',
     name: 'Setup Inicial',
     price: '$699.990',
+    originalPrice: '$999.990',
+    discountPct: 30,
+    cupos: 10,
     priceSuffix: '+ IVA',
     subtitle: 'Todo listo para empezar',
     features: [
@@ -153,12 +159,30 @@ export default function Pricing() {
 
               {/* Price */}
               <div className="mb-2">
-                <span className="text-3xl lg:text-4xl font-extrabold text-white">
-                  {plan.price}
-                </span>
-                <span className="text-slate-400 text-sm ml-2">{plan.priceSuffix}</span>
+                {plan.originalPrice && (
+                  <div className="flex items-center gap-2 mb-1">
+                    <span className="text-sm text-slate-500 line-through">{plan.originalPrice}</span>
+                    <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">
+                      −{plan.discountPct}%
+                    </span>
+                  </div>
+                )}
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl lg:text-4xl font-extrabold text-white">
+                    {plan.price}
+                  </span>
+                  <span className="text-slate-400 text-sm">{plan.priceSuffix}</span>
+                </div>
               </div>
-              <p className="text-sm text-slate-400 mb-6">{plan.subtitle}</p>
+              <p className="text-sm text-slate-400 mb-4">{plan.subtitle}</p>
+              {plan.cupos && (
+                <div className="flex items-center gap-1.5 mb-6">
+                  <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block flex-shrink-0" />
+                  <span className="text-xs text-amber-400 font-medium">
+                    Solo {plan.cupos} cupos disponibles este mes
+                  </span>
+                </div>
+              )}
 
               {/* Divider */}
               <div className="h-px bg-brand-purple/20 mb-6" />
