@@ -179,7 +179,8 @@ export default function Pricing() {
                 <div className="flex items-center gap-1.5 mb-6">
                   <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block flex-shrink-0" />
                   <span className="text-xs text-amber-400 font-medium">
-                    Solo {plan.cupos} cupos disponibles este mes
+                    Solo {plan.cupos} cupos disponibles este mes{' '}
+                    <span className="font-normal opacity-80">(no somos un servicio masivo, hacemos pocos setups al mes para garantizar un buen trabajo)</span>
                   </span>
                 </div>
               )}
