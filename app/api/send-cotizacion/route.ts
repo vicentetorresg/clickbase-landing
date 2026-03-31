@@ -11,6 +11,7 @@ const SERVICIOS_DETALLE: Record<string, {
   nombre: string
   tipo: string
   precio: number
+  precioLista?: number
   sla: string
   features: string[]
 }> = {
@@ -18,6 +19,7 @@ const SERVICIOS_DETALLE: Record<string, {
     nombre: 'Setup Inicial',
     tipo: 'Pago único',
     precio: 699990,
+    precioLista: 999990,
     sla: 'Entrega en 5–7 días hábiles desde el pago.',
     features: [
       'Diseño y desarrollo de landing page de alta conversión',
@@ -102,7 +104,7 @@ export async function POST(req: Request) {
           <span style="display:inline-block;margin-left:8px;font-size:11px;background:rgba(124,58,237,0.15);color:#a78bfa;border:1px solid rgba(124,58,237,0.3);border-radius:20px;padding:2px 8px;">${s.tipo}</span>
         </div>
         <div style="text-align:right;flex-shrink:0;">
-          ${desc > 0 ? `<div style="font-size:11px;color:#555;text-decoration:line-through;">${fmt(s.precio)}</div>` : ''}
+          ${s.precioLista ? `<div style="font-size:12px;color:#555;text-decoration:line-through;">${fmt(s.precioLista)}</div>` : desc > 0 ? `<div style="font-size:12px;color:#555;text-decoration:line-through;">${fmt(s.precio)}</div>` : ''}
           <span style="font-size:18px;font-weight:800;color:#fff;">${fmt(Math.round(s.precio * (1 - desc / 100)))}</span>
           <span style="font-size:11px;color:#64748b;margin-left:4px;">+ IVA${s.tipo === 'Mensual' ? ' / mes' : ''}</span>
         </div>
@@ -146,13 +148,13 @@ export async function POST(req: Request) {
       <h2 style="font-size:15px;font-weight:700;color:#fff;margin:0 0 16px 0;">Resumen de inversión</h2>
 
       ${total_unico > 0 ? (() => {
-        const precioOriginalUnico = serviciosDetalle.filter(s=>s.tipo==='Pago único').reduce((a,s)=>a+s.precio,0)
+        const precioOriginalUnico = serviciosDetalle.filter(s=>s.tipo==='Pago único').reduce((a,s)=>a+(s.precioLista??s.precio),0)
         const ahorroUnico = precioOriginalUnico - total_unico
         return `
       <div style="display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
         <div>
           <div style="font-size:13px;color:#94a3b8;margin-bottom:2px;">Pago único (setup)</div>
-          ${desc > 0 ? `<div style="font-size:13px;color:#64748b;text-decoration:line-through;">${fmt(precioOriginalUnico)} + IVA</div>` : ''}
+          <div style="font-size:13px;color:#64748b;text-decoration:line-through;">${fmt(precioOriginalUnico)} + IVA</div>
         </div>
         <div style="text-align:right;">
           <div style="font-size:22px;font-weight:800;color:#fff;">${fmt(total_unico)} <span style="font-size:12px;color:#64748b;font-weight:400;">+ IVA</span></div>

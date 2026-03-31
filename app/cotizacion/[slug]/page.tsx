@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react'
 import { supabase, type Cotizacion } from '@/lib/supabase'
 
-const SERVICIOS_MAP: Record<string, { nombre: string; tipo: string; precio: number; features: string[] }> = {
+const SERVICIOS_MAP: Record<string, { nombre: string; tipo: string; precio: number; precioOriginal?: number; features: string[] }> = {
   setup: {
     nombre: 'Setup Inicial',
     tipo: 'one-time',
     precio: 699990,
+    precioOriginal: 999990,
     features: [
       'Diseño y desarrollo de landing page',
       'Formulario de contacto conectado',
@@ -163,7 +164,10 @@ export default function CotizacionPage({ params }: { params: { slug: string } })
                   </span>
                 </div>
                 <div className="text-right flex-shrink-0">
-                  {(s.tipo === 'one-time' ? descuentoUnico : descuentoMensual) > 0 && (
+                  {s.precioOriginal && (
+                    <div className="text-xs text-slate-600 line-through">{fmt(s.precioOriginal)}</div>
+                  )}
+                  {!s.precioOriginal && (s.tipo === 'one-time' ? descuentoUnico : descuentoMensual) > 0 && (
                     <div className="text-xs text-slate-600 line-through">{fmt(s.precio)}</div>
                   )}
                   <span className="text-xl font-extrabold text-white">
@@ -194,11 +198,9 @@ export default function CotizacionPage({ params }: { params: { slug: string } })
               <div className="flex justify-between items-center">
                 <span className="text-slate-400 text-sm">Pago único (setup)</span>
                 <div className="text-right">
-                  {descuentoUnico > 0 && (
-                    <div className="text-xs text-slate-600 line-through">
-                      {fmt(unicos.reduce((a, s) => a + s.precio, 0))} + IVA
-                    </div>
-                  )}
+                  <div className="text-xs text-slate-600 line-through">
+                    {fmt(unicos.reduce((a, s) => a + (s.precioOriginal ?? s.precio), 0))} + IVA
+                  </div>
                   <span className="text-2xl font-extrabold text-white">{fmt(data.total_unico)}</span>
                   <span className="text-sm text-slate-400 ml-1">+ IVA</span>
                 </div>

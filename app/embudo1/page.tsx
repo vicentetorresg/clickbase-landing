@@ -152,7 +152,7 @@ export default function Embudo1() {
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        ⚡ Setup completo desde <strong>$699.990 + IVA</strong> — Página + campaña + tracking listo en 7 días
+        ⚡ Setup completo: <span className="line-through opacity-60 mx-1">$999.990</span><strong>$699.990 + IVA</strong> — Página + campaña + tracking listo en 7 días
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -314,7 +314,12 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center p-6 rounded-2xl bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 border border-brand-purple/30">
-            <p className="text-2xl font-extrabold text-white mb-1">Todo esto desde <span className="gradient-text">$699.990 + IVA</span></p>
+            <div className="flex items-center justify-center gap-2 flex-wrap mb-1">
+              <span className="text-2xl font-extrabold text-white">Todo esto:</span>
+              <span className="text-lg text-slate-500 line-through">$999.990</span>
+              <span className="text-2xl font-extrabold gradient-text">$699.990 + IVA</span>
+              <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
+            </div>
             <p className="text-slate-400 text-sm">Pago único. Sin mensualidades obligatorias.</p>
           </div>
         </div>
@@ -469,8 +474,16 @@ export default function Embudo1() {
             <div className="pricing-highlight rounded-2xl p-8 relative overflow-hidden">
               <div className="absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full gradient-bg text-white">Más popular</div>
               <p className="text-slate-400 text-sm mb-2">Setup único</p>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-sm text-slate-500 line-through">$999.990</span>
+                <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
+              </div>
               <p className="text-4xl font-extrabold text-white mb-1">$699.990</p>
-              <p className="text-slate-500 text-xs mb-6">+ IVA · Pago único</p>
+              <p className="text-slate-500 text-xs mb-3">+ IVA · Pago único</p>
+              <div className="flex items-center gap-1.5 mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block flex-shrink-0" />
+                <span className="text-xs text-amber-400 font-medium">Solo 10 cupos disponibles este mes</span>
+              </div>
               <ul className="space-y-3 mb-8">
                 {['Landing page de conversión', 'Google Tag Manager', 'Meta Pixel', 'Configuración de conversiones', 'Primera campaña lista', 'Soporte 30 días'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
