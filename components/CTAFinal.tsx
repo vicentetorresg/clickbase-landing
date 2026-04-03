@@ -5,12 +5,14 @@ import { fbq } from '@/lib/fbq'
 
 type FormData = {
   nombre: string
+  email: string
   rubro: string
   whatsapp: string
 }
 
 const initialFormData: FormData = {
   nombre: '',
+  email: '',
   rubro: '',
   whatsapp: '',
 }
@@ -216,6 +218,22 @@ export default function CTAFinal() {
                         onChange={handleChange}
                         required
                         placeholder="Tu nombre completo"
+                        className={inputClass}
+                      />
+                    </div>
+
+                    {/* Email */}
+                    <div>
+                      <label className="block text-sm font-medium text-slate-300 mb-1.5">
+                        Email <span className="text-brand-purple-light">*</span>
+                      </label>
+                      <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                        placeholder="tu@email.com"
                         className={inputClass}
                       />
                     </div>
