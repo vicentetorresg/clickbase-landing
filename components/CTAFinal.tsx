@@ -119,7 +119,7 @@ export default function CTAFinal() {
               rel="noopener noreferrer"
               onClick={() => {
                 pushEvent({ event: 'whatsapp_click', location: 'cta_final' })
-                fbq('trackCustom', 'WhatsAppClick')
+                fbq('track', 'Contact')
               }}
               className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-7 py-4 rounded-xl transition-all duration-200 text-base mb-3 w-full sm:w-auto justify-center sm:justify-start"
               style={{ boxShadow: '0 0 24px rgba(37, 211, 102, 0.3)' }}
