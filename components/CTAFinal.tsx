@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { fbq } from '@/lib/fbq'
 
 type FormData = {
   nombre: string
@@ -62,6 +63,8 @@ export default function CTAFinal() {
         form_location: 'cta_final',
         rubro: formData.rubro,
       })
+      // Meta Pixel — conversión de formulario
+      fbq('track', 'Lead')
 
       setSubmitted(true)
       setFormData(initialFormData)
@@ -112,7 +115,10 @@ export default function CTAFinal() {
               href="https://wa.me/56994366697?text=Hola%2C%20quiero%20cotizar%20la%20p%C3%A1gina%20web%20%2B%20campa%C3%B1a%20%2B%20tracking.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
               target="_blank"
               rel="noopener noreferrer"
-              onClick={() => pushEvent({ event: 'whatsapp_click', location: 'cta_final' })}
+              onClick={() => {
+                pushEvent({ event: 'whatsapp_click', location: 'cta_final' })
+                fbq('track', 'Contact')
+              }}
               className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-7 py-4 rounded-xl transition-all duration-200 text-base mb-3 w-full sm:w-auto justify-center sm:justify-start"
               style={{ boxShadow: '0 0 24px rgba(37, 211, 102, 0.3)' }}
             >
