@@ -1,39 +1,39 @@
 const painPoints = [
   {
-    icon: '🔥',
-    title: 'Gastas en anuncios pero no sabes qué genera leads',
+    icon: '😤',
+    title: 'Llevas años trabajando duro y el negocio no crece',
     description:
-      'Sin tracking bien configurado, no puedes saber qué campaña, anuncio o palabra clave realmente convierte.',
+      'Pones todo el esfuerzo, pero las ventas siguen igual mes a mes. La sensación de estar corriendo en círculos es real.',
   },
   {
-    icon: '📉',
-    title: 'Tu página no está preparada para convertir tráfico pagado',
+    icon: '📵',
+    title: 'Dependes del boca en boca y nunca sabes cuándo llega el próximo cliente',
     description:
-      'Una web genérica no es lo mismo que una landing pensada para vender. La diferencia en conversión puede ser enorme.',
+      'Los referidos son buenos, pero no son predecibles. Un mes lleno, el siguiente vacío — sin poder controlar nada.',
   },
   {
-    icon: '👻',
-    title: 'No tienes Pixel de Meta ni conversiones de Google instaladas',
+    icon: '🌐',
+    title: 'Tus competidores aparecen en Google y tú no existes en internet',
     description:
-      'Sin estos datos, Google y Meta no pueden optimizar tus anuncios automáticamente. Estás compitiendo con las manos atadas.',
-  },
-  {
-    icon: '🎯',
-    title: 'No sabes cuántos leads reales te generan tus campañas',
-    description:
-      'Si no tienes un sistema de medición, cada decisión de inversión es básicamente una apuesta.',
-  },
-  {
-    icon: '🔄',
-    title: 'Dependes de boca en boca, no de un sistema predecible',
-    description:
-      'Los referidos son geniales, pero no son escalables. Un sistema bien configurado te da leads todos los días.',
+      'Mientras otros negocios captan clientes online todos los días, tú sigues invisible para quienes buscan lo que ofreces.',
   },
   {
     icon: '💸',
-    title: 'Cada mes terminas sin saber qué funcionó y qué fue plata botada',
+    title: 'Ya intentaste publicidad y solo quemaste plata sin resultados',
     description:
-      'Sin datos correctos, el ciclo se repite: gastar, no medir, dudar, volver a gastar.',
+      'Pagaste a alguien para hacer anuncios, no llegaron clientes y quedaste con la sensación de que "el marketing digital no funciona".',
+  },
+  {
+    icon: '🤷',
+    title: 'No tienes idea si tu página web te está generando clientes o no',
+    description:
+      'Tienes una web, pero no sabes cuántas personas la visitan, de dónde vienen ni si alguien la usa para contactarte.',
+  },
+  {
+    icon: '⏳',
+    title: 'No tienes tiempo para aprender marketing — tienes un negocio que atender',
+    description:
+      'YouTube, cursos, agencias que no explican nada... El marketing digital parece diseñado para confundirte, no para ayudarte.',
   },
 ]
 
@@ -49,14 +49,13 @@ export default function Problem() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <span className="section-label">El problema</span>
+          <span className="section-label">¿Te reconoces aquí?</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 max-w-3xl mx-auto leading-tight">
-            ¿Por qué tus anuncios no están generando los resultados que esperabas?
+            El estancamiento no es mala suerte. Es falta de sistema.
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            La mayoría de los negocios invierte en publicidad sin tener la base correcta.
-            El resultado: plata gastada, leads que no llegan y campañas que no se pueden
-            optimizar.
+            La mayoría de los dueños de PYME trabajan duro, pero siguen dependiendo del azar.
+            Sin un sistema que atraiga clientes de forma predecible, siempre vas a estar apagando incendios.
           </p>
         </div>
 
@@ -85,7 +84,7 @@ export default function Problem() {
 
         {/* Bottom CTA nudge */}
         <div className="text-center mt-12">
-          <p className="text-slate-400 text-sm mb-4">¿Te identificas con alguno de estos problemas? Te ayudamos a resolverlos.</p>
+          <p className="text-slate-400 text-sm mb-4">Si te identificaste con alguno, tenemos exactamente lo que necesitas.</p>
           <a
             href="https://wa.me/56994366697?text=Hola%2C%20quiero%20cotizar%20la%20p%C3%A1gina%20web%20%2B%20campa%C3%B1a%20%2B%20tracking.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
             target="_blank"

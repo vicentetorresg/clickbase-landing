@@ -41,11 +41,11 @@ export default function Solution() {
         <div className="text-center mb-14">
           <span className="section-label">La solución</span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 max-w-3xl mx-auto leading-tight">
-            Una base completa para que tus campañas tengan donde aterrizar, medir y convertir.
+            Te construimos el sistema completo para que los clientes te encuentren, te contacten y vuelvan.
           </h2>
           <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
-            Tus anuncios no sirven de mucho si no tienes una página preparada para
-            convertir. Instalamos la estructura técnica para que cada clic cuente.
+            No necesitas entender de marketing digital. Nosotros nos encargamos de todo:
+            la web, los anuncios y los datos — para que tú te concentres en atender a tus clientes.
           </p>
         </div>
 
@@ -85,11 +85,11 @@ export default function Solution() {
               <div className="relative">
                 <span className="text-5xl font-serif text-brand-purple/40 leading-none block mb-4">"</span>
                 <blockquote className="text-2xl lg:text-3xl font-bold text-white italic leading-snug mb-6">
-                  No necesitas solo una página bonita. Necesitas una estructura que te ayude a captar contactos.
+                  No necesitas ser experto en marketing. Necesitas un sistema que trabaje mientras tú atiendes tu negocio.
                 </blockquote>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  La mayoría de los negocios pierde plata porque sus anuncios llevan a páginas que no convierten
-                  o porque no tienen los datos para saber qué está fallando. Nosotros instalamos la base correcta.
+                  Los dueños de PYME no tienen tiempo para aprender publicidad digital. Por eso armamos todo por ti:
+                  desde la página hasta los anuncios y el seguimiento — con resultados reales desde el primer mes.
                 </p>
 
                 {/* Mini checklist */}

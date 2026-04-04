@@ -104,12 +104,12 @@ export default function CTAFinal() {
           <div>
             <span className="section-label">Cotiza sin compromiso</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-6 leading-tight">
-              Habla con nosotros y{' '}
-              <span className="gradient-text">revisamos tu caso ahora.</span>
+              ¿Listo para dejar de depender del boca en boca?{' '}
+              <span className="gradient-text">Cuéntanos de tu negocio.</span>
             </h2>
             <p className="text-lg text-slate-400 mb-8 leading-relaxed">
-              Escríbenos por WhatsApp y te orientamos en minutos. Sin formularios,
-              sin esperas. Cuéntanos de tu negocio y te damos una propuesta rápida.
+              En 15 minutos te decimos si podemos ayudarte, cuánto cuesta y cuándo arrancamos.
+              Sin tecnicismos, sin presión. Solo una conversación honesta sobre tu negocio.
             </p>
 
             {/* WhatsApp button — primary CTA */}

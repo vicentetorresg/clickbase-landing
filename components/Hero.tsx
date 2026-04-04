@@ -27,21 +27,21 @@ export default function Hero() {
             {/* Badge pill */}
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-purple/40 bg-brand-purple/10 text-sm font-medium text-brand-purple-light mb-8 glow-purple">
               <span className="w-2 h-2 rounded-full bg-success animate-pulse inline-block" />
-              <span>Web + campaña + tracking activo — todo en un pack</span>
+              <span>Para dueños de PYME que quieren crecer de verdad</span>
             </div>
 
             {/* H1 */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
-              Tu página, tus anuncios y tu tracking:{' '}
+              ¿Tu negocio lleva meses estancado sin saber cómo atraer más clientes?{' '}
               <span className="gradient-text">
-                listos para captar clientes desde el día uno.
+                Te armamos el sistema completo para que lleguen solos.
               </span>
             </h1>
 
             {/* Subtitle */}
             <p className="text-lg text-slate-400 mb-6 leading-relaxed max-w-xl">
-              No solo una página bonita. Una base técnica completa para que tus
-              campañas funcionen, tu tracking mida y tus leads lleguen.
+              Página web profesional + anuncios en Google e Instagram + tracking real.
+              Sin tecnicismos, sin excusas — solo más clientes entrando por la puerta.
             </p>
 
             {/* CTAs */}

@@ -163,11 +163,11 @@ export default function Home() {
               <p className="text-sm font-semibold text-[#25D366] uppercase tracking-widest">En línea ahora — respuesta en minutos</p>
             </div>
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
-              ¿Tu negocio necesita más clientes desde Google?
+              ¿Tu negocio sigue estancado? Es hora de tener un sistema real.
             </h2>
             <p className="text-slate-400 mb-7 max-w-xl mx-auto">
-              Escríbenos y en minutos te decimos si el pack te sirve, cuánto cuesta y cuándo podemos partir.
-              Sin formularios, sin reuniones previas.
+              Escríbenos y en minutos te decimos si podemos ayudarte, cuánto cuesta y cuándo arrancamos.
+              Sin formularios, sin reuniones previas, sin compromisos.
             </p>
             <a
               href="https://wa.me/56994366697?text=Hola%2C%20quiero%20cotizar%20la%20p%C3%A1gina%20web%20%2B%20campa%C3%B1a%20%2B%20tracking.%20%C2%BFMe%20pueden%20dar%20m%C3%A1s%20informaci%C3%B3n%3F"
