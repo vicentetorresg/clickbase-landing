@@ -61,7 +61,7 @@ const plans: Plan[] = [
     disclaimer: 'Requiere haber completado el setup inicial',
     popularLabel: 'Más popular',
     features: [
-      { text: 'Soporte no prioritario por WhatsApp', included: true },
+      { text: 'Soporte por WhatsApp con respuesta durante el día', included: true },
       { text: 'Ajustes menores de contenido', included: true },
       { text: 'Monitoreo básico del sistema', included: true },
       { text: 'Apoyo general ante consultas', included: true },
