@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { fbq } from '@/lib/fbq'
 
 const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20vi%20la%20p%C3%A1gina%20y%20quiero%20cotizar%20el%20setup%20web%20%2B%20campa%C3%B1a.%20%C2%BFTienen%20cupos%20disponibles%3F'
-const LINKEDIN = 'https://www.linkedin.com/in/vicente-t-568362118/'
 
 function CTAButton({ text = 'Quiero mi setup ahora', size = 'lg', full = false, onClick }: { text?: string; size?: 'lg' | 'xl'; full?: boolean; onClick?: () => void }) {
   return (
@@ -138,18 +137,7 @@ function WAModal({ onClose, onConfirm }: { onClose: () => void; onConfirm: () =>
           alt="Vicente Torres G."
           className="w-20 h-20 rounded-2xl object-cover object-top mx-auto mb-4"
         />
-        <h3 className="text-white font-extrabold text-lg mb-1">Vicente Torres G.</h3>
-        <a
-          href={LINKEDIN}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-1.5 text-xs text-slate-400 hover:text-white border border-slate-700 hover:border-[#0A66C2] px-3 py-1.5 rounded-lg transition-colors duration-200 mb-5"
-        >
-          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-          </svg>
-          Ver perfil en LinkedIn
-        </a>
+        <h3 className="text-white font-extrabold text-lg mb-4">Vicente Torres G.</h3>
         <p className="text-slate-300 text-sm leading-relaxed mb-6">
           Al hacer click en este botón, te contactarás directamente con <strong className="text-white">Vicente Torres</strong>.
         </p>
@@ -340,7 +328,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center">
-            <CTAButton text="Quiero esta solución para mi negocio" size="xl" />
+            <CTAButton text="Quiero esta solución para mi negocio" size="xl" onClick={openModal} />
           </div>
         </div>
       </section>
@@ -513,7 +501,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center mt-12">
-            <CTAButton text="Empezar mi setup ahora" size="xl" />
+            <CTAButton text="Empezar mi setup ahora" size="xl" onClick={openModal} />
           </div>
         </div>
       </section>
@@ -552,7 +540,7 @@ export default function Embudo1() {
                   </li>
                 ))}
               </ul>
-              <CTAButton text="Quiero este setup" full />
+              <CTAButton text="Quiero este setup" full onClick={openModal} />
             </div>
 
             {/* Mantención card */}
@@ -600,7 +588,7 @@ export default function Embudo1() {
       <div className="py-12 gradient-bg text-center px-4">
         <p className="text-white/80 text-sm mb-2">¿Listo para tener tu sistema completo?</p>
         <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-6">Escríbenos y te cotizamos en minutos</h3>
-        <CTAButton text="Cotizar por WhatsApp ahora" size="xl" />
+        <CTAButton text="Cotizar por WhatsApp ahora" size="xl" onClick={openModal} />
       </div>
 
       {/* ── TESTIMONIALS 2 ──────────────────────────────────── */}
