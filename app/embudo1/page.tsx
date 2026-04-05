@@ -170,7 +170,7 @@ export default function Embudo1() {
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        ⚡ Página + campaña + tracking listo en 7 días — <span className="line-through opacity-80 mx-1">$999.990</span><strong>$699.990 + IVA</strong> · o 3 cuotas sin interés de <strong>$233.330</strong>
+        ⚡ Página + campaña + tracking completo — listo en 7 días hábiles · Sin contrato de permanencia
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
