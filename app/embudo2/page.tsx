@@ -6,22 +6,22 @@ import { fbq } from '@/lib/fbq'
 
 const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20aumentar%20los%20clientes%20de%20mi%20empresa%20y%20necesito%20ayuda'
 
-function CTAButton({ text = 'Diagnosticar mi campaña gratis', size = 'lg', full = false, onClick }: { text?: string; size?: 'lg' | 'xl'; full?: boolean; onClick?: () => void }) {
+const WAIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
+  </svg>
+)
+
+function WAButton({ text = 'Escribir por WhatsApp', full = false, onClick }: { text?: string; full?: boolean; onClick?: () => void }) {
   return (
     <button
       onClick={onClick}
-      className={`
-        gradient-bg text-white font-extrabold rounded-2xl inline-flex items-center justify-center gap-3
-        hover:opacity-90 active:scale-95 transition-all duration-200 hover:shadow-glow-purple
-        ${size === 'xl' ? 'px-10 py-5 text-lg' : 'px-8 py-4 text-base'}
-        ${full ? 'w-full' : ''}
-      `}
+      className={`inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-9 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 ${full ? 'w-full' : ''}`}
+      style={{ boxShadow: '0 0 28px rgba(37, 211, 102, 0.35)' }}
     >
-      <span>💬</span>
+      <WAIcon />
       {text}
-      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0">
-        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
     </button>
   )
 }
@@ -88,11 +88,11 @@ const testimonials = [
 const faqs = [
   {
     q: '¿Por qué mis ads actuales no están funcionando?',
-    a: 'Las causas más comunes son: tracking incorrecto (el pixel o las conversiones no están bien configuradas), landing page que no convierte (la página recibe tráfico pero no persuade al visitante), segmentación incorrecta del anuncio, o presupuesto insuficiente. Escríbenos y hacemos un diagnóstico rápido sin costo.',
+    a: 'Las causas más comunes son: tracking incorrecto (el pixel o las conversiones no están bien configuradas), landing page que no convierte (la página recibe tráfico pero no persuade al visitante), segmentación incorrecta del anuncio, o presupuesto insuficiente. Escríbenos y te contamos cómo lo arreglamos.',
   },
   {
     q: '¿Pueden revisar y corregir mis campañas existentes?',
-    a: 'Sí. Si ya tienes campañas activas, podemos hacer una auditoría, identificar los problemas y corregirlos. El setup incluye la corrección del tracking, la reconstrucción de la landing si es necesario y la optimización de la campaña.',
+    a: 'Sí. Si ya tienes campañas activas, hacemos una revisión completa, identificamos los problemas y los corregimos. El setup incluye la corrección del tracking, la reconstrucción de la landing si es necesario y la optimización de la campaña.',
   },
   {
     q: '¿Cuánto tiempo tarda en verse la mejora?',
@@ -182,8 +182,11 @@ export default function Embudo2() {
       </header>
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
-      <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        🔥 Auditoría de campaña <strong>gratuita</strong> — Diagnóstico sin costo para los negocios que escriban hoy
+      <div className="bg-gradient-to-r from-[#1a6e3a] to-[#1a5c6e] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
+        <span className="inline-flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse inline-block" />
+          En línea ahora — Setup completo en 7 días, te respondemos en minutos
+        </span>
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -198,22 +201,22 @@ export default function Embudo2() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
-            ¿Pagaste publicidad{' '}
-            <span className="text-red-400">y no llegaron clientes?</span>
+            ¿Llevas meses pagando publicidad{' '}
+            <span className="text-red-400">sin ver resultados?</span>
             <br />
-            <span className="gradient-text">El problema no son los ads.</span>
+            <span className="gradient-text">El problema no son los ads. Tiene solución.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            La mayoría de las campañas que no funcionan tienen tracking roto, landing sin estructura, o ambos. En 7 días te lo arreglamos y relanzamos.
+            La mayoría de las campañas que no funcionan tienen tracking roto, landing sin estructura, o ambos. En 7 días te lo revisamos, corregimos y relanzamos.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <CTAButton text="Diagnosticar mi campaña gratis" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
 
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
-            {['✅ Diagnóstico sin costo', '✅ Tracking correcto desde día 1', '✅ Setup en 7 días', '✅ Sin permanencia'].map((pill) => (
+            {['✅ Tracking correcto desde día 1', '✅ Setup completo en 7 días', '✅ Sin permanencia', '✅ Pago único'].map((pill) => (
               <span key={pill} className="px-3 py-1.5 bg-dark-card border border-slate-700 rounded-full text-slate-300">{pill}</span>
             ))}
           </div>
@@ -244,10 +247,10 @@ export default function Embudo2() {
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.05) 0%, transparent 60%)' }} />
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <span className="section-label">Diagnóstico</span>
+            <span className="section-label">El problema</span>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mt-4 mb-4 leading-tight">
               ¿Por qué tus ads{' '}
-              <span className="gradient-text">no están funcionando?</span>
+              <span className="gradient-text">no están trayendo clientes?</span>
             </h2>
           </div>
 
@@ -329,7 +332,7 @@ export default function Embudo2() {
           </div>
 
           <div className="text-center mt-8">
-            <CTAButton text="Quiero la versión correcta" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
         </div>
       </section>
@@ -386,7 +389,7 @@ export default function Embudo2() {
           <div className="grid sm:grid-cols-2 gap-4 mb-10">
             {[
               'Landing page optimizada para conversión (nueva o reconstruida)',
-              'Auditoría y corrección del tracking existente',
+              'Revisión y corrección del tracking existente',
               'Google Tag Manager correctamente configurado',
               'Meta Pixel instalado y verificado',
               'Conversiones configuradas en Google Ads',
@@ -461,21 +464,29 @@ export default function Embudo2() {
                 <strong className="text-white">cada setup pasa por mis manos antes de entregarse.</strong>{' '}
                 Eso incluye revisar que el tracking esté 100% correcto.
               </p>
-              <button
-                onClick={openModal}
-                className="inline-flex items-center gap-2 gradient-bg text-white font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 text-sm"
-              >
-                💬 Hablar directamente conmigo
-              </button>
+              <WAButton text="Escribir directamente" onClick={openModal} />
             </div>
           </div>
         </div>
       </section>
 
       {/* ── CTA INTERMEDIA ──────────────────────────────────── */}
-      <div className="py-10 text-center px-4">
-        <p className="text-slate-400 text-sm mb-4">Escríbenos y revisamos tu campaña actual sin costo</p>
-        <CTAButton text="Quiero que revisen mi campaña" size="xl" onClick={openModal} />
+      <div className="py-14 relative overflow-hidden text-center px-4">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(37,211,102,0.07) 0%, rgba(124,58,237,0.10) 100%)' }} />
+        <div className="relative max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse inline-block" />
+            <p className="text-sm font-semibold text-[#25D366] uppercase tracking-widest">En línea ahora — respuesta en minutos</p>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            ¿Tus ads siguen sin traer clientes? Cuéntanos qué pasó.
+          </h2>
+          <p className="text-slate-400 mb-7 max-w-xl mx-auto">
+            Escríbenos y en minutos te decimos qué está fallando, cómo lo arreglamos y cuándo arrancamos.
+            Sin formularios, sin reuniones previas, sin compromisos.
+          </p>
+          <WAButton text="Quiero más clientes" onClick={openModal} />
+        </div>
       </div>
 
       {/* ── HOW IT WORKS ────────────────────────────────────── */}
@@ -492,7 +503,7 @@ export default function Embudo2() {
 
           <div className="grid md:grid-cols-4 gap-6">
             {[
-              { step: '01', icon: '🔍', title: 'Diagnóstico', desc: 'Revisamos tu tracking, landing y campaña actual. Te decimos exactamente qué está fallando.' },
+              { step: '01', icon: '🔍', title: 'Revisión inicial', desc: 'Revisamos tu tracking, landing y campaña actual. Identificamos exactamente qué está fallando.' },
               { step: '02', icon: '📋', title: 'Plan de corrección', desc: 'Definimos qué necesita ser reconstruido y qué solo necesita corrección. Sin sorpresas.' },
               { step: '03', icon: '⚙️', title: 'Construcción', desc: 'Nuestro equipo corrige o reconstruye todo: landing, tracking, conversiones y campaña.' },
               { step: '04', icon: '🚀', title: 'Relanzamiento', desc: 'Revisamos todo contigo y relanzamos. Desde ese momento, ves resultados reales.' },
@@ -511,7 +522,7 @@ export default function Embudo2() {
           </div>
 
           <div className="text-center mt-12">
-            <CTAButton text="Empezar con el diagnóstico" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
         </div>
       </section>
@@ -549,13 +560,13 @@ export default function Embudo2() {
                 <span className="text-xs text-amber-400 font-medium">Solo 10 cupos disponibles por mes <span className="font-normal opacity-80">(para garantizar un trabajo personalizado para tu negocio)</span></span>
               </div>
               <ul className="space-y-3 mb-8">
-                {['Auditoría de tracking existente', 'Landing nueva o corregida', 'Google Tag Manager correcto', 'Meta Pixel verificado', 'Conversiones reconfiguradas', 'Campaña relanzada o corregida'].map((item) => (
+                {['Revisión del tracking existente', 'Landing nueva o corregida', 'Google Tag Manager correcto', 'Meta Pixel verificado', 'Conversiones reconfiguradas', 'Campaña relanzada o corregida'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
                     <span className="text-success">✓</span> {item}
                   </li>
                 ))}
               </ul>
-              <CTAButton text="Corregir mi setup" full onClick={openModal} />
+              <WAButton text="Quiero más clientes" full onClick={openModal} />
             </div>
 
             <div className="card-dark rounded-2xl p-8">
@@ -569,12 +580,7 @@ export default function Embudo2() {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={openModal}
-                className="w-full border border-slate-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm hover:border-slate-400 hover:bg-white/5 transition-all duration-200 flex items-center justify-center"
-              >
-                Consultar mantención
-              </button>
+              <WAButton text="Consultar mantención" full onClick={openModal} />
             </div>
           </div>
 
@@ -599,10 +605,22 @@ export default function Embudo2() {
       </section>
 
       {/* ── CTA INTERMEDIA 2 ────────────────────────────────── */}
-      <div className="py-12 gradient-bg text-center px-4">
-        <p className="text-white/80 text-sm mb-2">Diagnóstico gratuito — Sin compromiso</p>
-        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-6">Escríbenos y te decimos qué está fallando</h3>
-        <CTAButton text="Quiero el diagnóstico gratis" size="xl" onClick={openModal} />
+      <div className="py-14 relative overflow-hidden text-center px-4">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(37,211,102,0.07) 0%, rgba(124,58,237,0.10) 100%)' }} />
+        <div className="relative max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse inline-block" />
+            <p className="text-sm font-semibold text-[#25D366] uppercase tracking-widest">En línea ahora — respuesta en minutos</p>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            ¿Tu negocio sigue estancado? Es hora de tener un sistema real.
+          </h3>
+          <p className="text-slate-400 mb-7 max-w-xl mx-auto">
+            Escríbenos y en minutos te decimos cómo lo arreglamos, cuánto cuesta y cuándo arrancamos.
+            Sin formularios, sin reuniones previas, sin compromisos.
+          </p>
+          <WAButton text="Quiero más clientes" onClick={openModal} />
+        </div>
       </div>
 
       {/* ── TESTIMONIALS 2 ──────────────────────────────────── */}
@@ -652,7 +670,7 @@ export default function Embudo2() {
             No tienes que confiar en nuestra palabra: los números lo demuestran.
           </p>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
-            {['✅ Entrega en 7 días', '✅ Datos en tiempo real', '✅ Sin permanencia', '✅ Diagnóstico gratuito'].map((item) => (
+            {['✅ Entrega en 7 días', '✅ Datos en tiempo real', '✅ Sin permanencia', '✅ Pago único'].map((item) => (
               <span key={item} className="text-slate-300">{item}</span>
             ))}
           </div>
@@ -684,7 +702,7 @@ export default function Embudo2() {
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-purple/40 bg-brand-purple/10 text-sm font-medium text-brand-purple-light mb-8">
             <span className="w-2 h-2 rounded-full bg-success animate-pulse inline-block" />
-            Diagnóstico gratuito disponible ahora
+            Cupos disponibles este mes — responde en minutos
           </div>
 
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-6 leading-tight">
@@ -697,7 +715,7 @@ export default function Embudo2() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <CTAButton text="Quiero empezar ahora" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
 
           <p className="text-slate-500 text-sm">

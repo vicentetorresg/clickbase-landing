@@ -6,22 +6,22 @@ import { fbq } from '@/lib/fbq'
 
 const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
 
-function CTAButton({ text = 'Quiero mi setup ahora', size = 'lg', full = false, onClick }: { text?: string; size?: 'lg' | 'xl'; full?: boolean; onClick?: () => void }) {
+const WAIcon = () => (
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
+  </svg>
+)
+
+function WAButton({ text = 'Escribir por WhatsApp', full = false, onClick }: { text?: string; full?: boolean; onClick?: () => void }) {
   return (
     <button
       onClick={onClick}
-      className={`
-        gradient-bg text-white font-extrabold rounded-2xl inline-flex items-center justify-center gap-3
-        hover:opacity-90 active:scale-95 transition-all duration-200 hover:shadow-glow-purple
-        ${size === 'xl' ? 'px-10 py-5 text-lg' : 'px-8 py-4 text-base'}
-        ${full ? 'w-full' : ''}
-      `}
+      className={`inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-9 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 ${full ? 'w-full' : ''}`}
+      style={{ boxShadow: '0 0 28px rgba(37, 211, 102, 0.35)' }}
     >
-      <span>💬</span>
+      <WAIcon />
       {text}
-      <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor" className="flex-shrink-0">
-        <path fillRule="evenodd" d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z" clipRule="evenodd" />
-      </svg>
     </button>
   )
 }
@@ -169,8 +169,11 @@ export default function Embudo1() {
       </header>
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
-      <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        ⚡ Página + campaña + tracking completo — listo en 7 días hábiles · Pago único, sin mensualidades
+      <div className="bg-gradient-to-r from-[#1a6e3a] to-[#1a5c6e] text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
+        <span className="inline-flex items-center gap-2">
+          <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse inline-block" />
+          En línea ahora — Página + campaña + tracking completo, listo en 7 días · Pago único, sin mensualidades
+        </span>
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -185,18 +188,18 @@ export default function Embudo1() {
           </div>
 
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold leading-tight tracking-tight mb-6">
-            Deja de perder <span className="gradient-text">clientes online.</span>
+            ¿Tu negocio lleva meses{' '}
+            <span className="text-red-400">sin conseguir clientes online?</span>
             <br />
-            Te armamos todo en{' '}
-            <span className="gradient-text">7 días.</span>
+            <span className="gradient-text">Te armamos el sistema completo para que lleguen solos.</span>
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Web lista para convertir + Google o Meta Ads + tracking activo desde día 1. Sin técnicos, sin contratos.
+            Web lista para convertir + Google o Meta Ads + tracking activo desde día 1. Todo en 7 días. Sin técnicos, sin contratos, sin meses de espera.
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <CTAButton text="Quiero cotizar mi setup" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
 
           {/* Trust pills */}
@@ -294,7 +297,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center">
-            <CTAButton text="Quiero esta solución para mi negocio" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
         </div>
       </section>
@@ -388,21 +391,29 @@ export default function Embudo1() {
                 Yo instalo todo, lo dejo funcionando y te entrego listo para captar leads.{' '}
                 <strong className="text-white">Cada proyecto pasa por mis manos antes de entregarse.</strong>
               </p>
-              <button
-                onClick={openModal}
-                className="inline-flex items-center gap-2 gradient-bg text-white font-bold px-6 py-3 rounded-xl hover:opacity-90 transition-all duration-200 text-sm"
-              >
-                💬 Hablar directamente conmigo
-              </button>
+              <WAButton text="Escribir directamente" onClick={openModal} />
             </div>
           </div>
         </div>
       </section>
 
       {/* ── CTA INTERMEDIA ──────────────────────────────────── */}
-      <div className="py-10 text-center px-4">
-        <p className="text-slate-400 text-sm mb-4">¿Tienes preguntas? Escríbenos sin compromiso</p>
-        <CTAButton text="Cotizar ahora por WhatsApp" size="xl" onClick={openModal} />
+      <div className="py-14 relative overflow-hidden text-center px-4">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(37,211,102,0.07) 0%, rgba(124,58,237,0.10) 100%)' }} />
+        <div className="relative max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse inline-block" />
+            <p className="text-sm font-semibold text-[#25D366] uppercase tracking-widest">En línea ahora — respuesta en minutos</p>
+          </div>
+          <h2 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            ¿Tu negocio sigue estancado? Es hora de tener un sistema real.
+          </h2>
+          <p className="text-slate-400 mb-7 max-w-xl mx-auto">
+            Escríbenos y en minutos te decimos cuánto cuesta y cuándo arrancamos.
+            Sin formularios, sin reuniones previas, sin compromisos.
+          </p>
+          <WAButton text="Quiero más clientes" onClick={openModal} />
+        </div>
       </div>
 
       {/* ── TESTIMONIALS 1 ──────────────────────────────────── */}
@@ -475,7 +486,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center mt-12">
-            <CTAButton text="Empezar mi setup ahora" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
         </div>
       </section>
@@ -520,7 +531,7 @@ export default function Embudo1() {
                   </li>
                 ))}
               </ul>
-              <CTAButton text="Quiero este setup" full onClick={openModal} />
+              <WAButton text="Quiero más clientes" full onClick={openModal} />
             </div>
 
             {/* Mantención card */}
@@ -535,12 +546,7 @@ export default function Embudo1() {
                   </li>
                 ))}
               </ul>
-              <button
-                onClick={openModal}
-                className="w-full border border-slate-600 text-white font-bold px-6 py-3.5 rounded-xl text-sm hover:border-slate-400 hover:bg-white/5 transition-all duration-200 flex items-center justify-center"
-              >
-                Consultar mantención
-              </button>
+              <WAButton text="Consultar mantención" full onClick={openModal} />
             </div>
           </div>
 
@@ -565,10 +571,21 @@ export default function Embudo1() {
       </section>
 
       {/* ── CTA INTERMEDIA 2 ────────────────────────────────── */}
-      <div className="py-12 gradient-bg text-center px-4">
-        <p className="text-white/80 text-sm mb-2">¿Listo para tener tu sistema completo?</p>
-        <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-6">Escríbenos y te cotizamos en minutos</h3>
-        <CTAButton text="Cotizar por WhatsApp ahora" size="xl" onClick={openModal} />
+      <div className="py-14 relative overflow-hidden text-center px-4">
+        <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(135deg, rgba(37,211,102,0.07) 0%, rgba(124,58,237,0.10) 100%)' }} />
+        <div className="relative max-w-2xl mx-auto">
+          <div className="inline-flex items-center gap-2 mb-4">
+            <span className="w-2 h-2 rounded-full bg-[#25D366] animate-pulse inline-block" />
+            <p className="text-sm font-semibold text-[#25D366] uppercase tracking-widest">Sin compromiso — respuesta en minutos</p>
+          </div>
+          <h3 className="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+            ¿Sigues esperando que los clientes lleguen solos?
+          </h3>
+          <p className="text-slate-400 mb-7 max-w-xl mx-auto">
+            En 7 días tienes todo listo: web, campaña y tracking. Escríbenos y te cotizamos ahora.
+          </p>
+          <WAButton text="Quiero más clientes" onClick={openModal} />
+        </div>
       </div>
 
       {/* ── TESTIMONIALS 2 ──────────────────────────────────── */}
@@ -700,7 +717,7 @@ export default function Embudo1() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <CTAButton text="Quiero empezar ahora" size="xl" onClick={openModal} />
+            <WAButton text="Quiero más clientes" onClick={openModal} />
           </div>
 
           <p className="text-slate-500 text-sm">
