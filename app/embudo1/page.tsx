@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { fbq } from '@/lib/fbq'
 // WAModal removed — buttons go directly to WhatsApp
 
-const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20el%20setup'
+const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
 
 function CTAButton({ text = 'Quiero mi setup ahora', size = 'lg', full = false, onClick }: { text?: string; size?: 'lg' | 'xl'; full?: boolean; onClick?: () => void }) {
   return (

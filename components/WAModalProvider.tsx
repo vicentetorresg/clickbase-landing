@@ -3,7 +3,7 @@
 import { createContext, useContext } from 'react'
 import { fbq } from '@/lib/fbq'
 
-const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20cotizar'
+const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
 
 const WAModalContext = createContext<() => void>(() => {})
 

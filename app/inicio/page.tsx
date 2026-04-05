@@ -35,7 +35,7 @@ function Footer() {
               captar clientes desde el día uno.
             </p>
             <a
-              href="https://wa.me/56955350255?text=Hola%2C%20quiero%20cotizar"
+              href="https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 text-sm text-[#25D366] hover:text-white transition-colors duration-200 font-medium"
