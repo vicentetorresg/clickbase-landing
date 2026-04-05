@@ -83,22 +83,23 @@ export default function WhatIncludes() {
 
         {/* Price highlight */}
         <div className="text-center mb-8">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 gradient-border rounded-2xl px-8 py-6">
-            <div>
-              <p className="text-sm text-slate-400 mb-1">Todo lo anterior por</p>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-base text-slate-300 line-through font-medium">$999.990 + IVA</span>
+          <div className="inline-flex flex-col items-center gap-4 gradient-border rounded-2xl px-8 py-6 w-full max-w-sm">
+            <div className="text-center">
+              <p className="text-sm text-slate-400 mb-2">Todo lo anterior por</p>
+              <div className="flex items-center justify-center gap-2 mb-1">
+                <span className="text-base text-slate-400 line-through font-medium">$999.990 + IVA</span>
                 <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
               </div>
-              <p className="text-4xl font-extrabold text-white">
-                $699.990
-                <span className="text-xl font-normal text-slate-400"> + IVA</span>
-              </p>
+              <p className="text-5xl font-extrabold gradient-text leading-none mb-1">$699.990</p>
+              <p className="text-slate-400 text-base mb-2">+ IVA</p>
+              <p className="text-white font-semibold text-sm mb-3">Un solo pago, todo instalado. Sin sorpresas.</p>
             </div>
-            <div className="hidden sm:block w-px h-12 bg-brand-purple/30" />
-            <div>
-              <p className="text-sm text-slate-400 mb-1">Pago único</p>
-              <p className="text-base font-semibold text-brand-purple-light">Sin mensualidad obligatoria</p>
+            <div className="flex items-center gap-3 w-full bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-3">
+              <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
+              <div>
+                <p className="text-sm text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
+                <p className="text-xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
+              </div>
             </div>
           </div>
         </div>

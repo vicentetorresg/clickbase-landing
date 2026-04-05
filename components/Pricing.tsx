@@ -166,28 +166,34 @@ export default function Pricing() {
               )}
 
               {/* Price */}
-              <div className="mb-2">
-                {plan.originalPrice && (
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="text-base text-slate-300 line-through">{plan.originalPrice}</span>
-                    <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">
-                      −{plan.discountPct}%
-                    </span>
+              {plan.badgeType === 'one-time' ? (
+                <div className="mb-4">
+                  {plan.originalPrice && (
+                    <div className="flex items-center gap-2 mb-2">
+                      <span className="text-base text-slate-400 line-through">{plan.originalPrice} + IVA</span>
+                      <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">
+                        −{plan.discountPct}%
+                      </span>
+                    </div>
+                  )}
+                  <p className="text-5xl font-extrabold gradient-text leading-none mb-1">{plan.price}</p>
+                  <p className="text-slate-400 text-base mb-2">{plan.priceSuffix}</p>
+                  <p className="text-white font-semibold text-sm mb-3">Un solo pago, todo instalado. Sin sorpresas.</p>
+                  <div className="flex items-center gap-3 mb-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-3">
+                    <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
+                    <div>
+                      <p className="text-sm text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
+                      <p className="text-xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
+                    </div>
                   </div>
-                )}
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl lg:text-4xl font-extrabold text-white">
-                    {plan.price}
-                  </span>
-                  <span className="text-slate-400 text-sm">{plan.priceSuffix}</span>
                 </div>
-              </div>
-              {plan.badgeType === 'one-time' && (
-                <div className="flex items-center gap-3 mb-3 mt-1 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-3">
-                  <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
-                  <div>
-                    <p className="text-sm font-bold text-white leading-tight">3 cuotas sin interés</p>
-                    <p className="text-lg font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
+              ) : (
+                <div className="mb-2">
+                  <div className="flex items-baseline gap-2">
+                    <span className="text-3xl lg:text-4xl font-extrabold text-white">
+                      {plan.price}
+                    </span>
+                    <span className="text-slate-400 text-sm">{plan.priceSuffix}</span>
                   </div>
                 </div>
               )}

@@ -170,7 +170,7 @@ export default function Embudo1() {
 
       {/* ── URGENCY BAR ─────────────────────────────────────── */}
       <div className="bg-gradient-to-r from-brand-purple/80 to-brand-cyan/60 text-white text-center py-2.5 px-4 text-xs sm:text-sm font-semibold">
-        ⚡ Página + campaña + tracking completo — listo en 7 días hábiles · Sin contrato de permanencia
+        ⚡ Página + campaña + tracking completo — listo en 7 días hábiles · Pago único, sin mensualidades
       </div>
 
       {/* ── HERO ────────────────────────────────────────────── */}
@@ -201,7 +201,7 @@ export default function Embudo1() {
 
           {/* Trust pills */}
           <div className="flex flex-wrap items-center justify-center gap-3 text-xs">
-            {['✅ Setup en 7 días', '✅ Sin contrato de permanencia', '✅ Tracking desde día 1', '✅ Soporte por WhatsApp'].map((pill) => (
+            {['✅ Setup en 7 días', '✅ Pago único, sin mensualidades', '✅ Tracking desde día 1', '✅ Soporte por WhatsApp'].map((pill) => (
               <span key={pill} className="px-3 py-1.5 bg-dark-card border border-slate-700 rounded-full text-slate-300">{pill}</span>
             ))}
           </div>
@@ -330,18 +330,20 @@ export default function Embudo1() {
             ))}
           </div>
 
-          <div className="text-center p-6 rounded-2xl bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 border border-brand-purple/30">
-            <p className="text-slate-400 text-sm mb-2">Página + primera campaña + tracking completo</p>
-            <div className="flex items-center justify-center gap-2 flex-wrap mb-1">
-              <span className="text-xl text-slate-300 line-through font-medium">$999.990 + IVA</span>
-              <span className="text-2xl font-extrabold gradient-text">$699.990 + IVA</span>
+          <div className="text-center p-8 rounded-2xl bg-gradient-to-r from-brand-purple/10 to-brand-cyan/10 border border-brand-purple/30">
+            <p className="text-slate-400 text-sm mb-4">Todo lo que incluye el setup</p>
+            <div className="flex items-center justify-center gap-2 mb-2">
+              <span className="text-lg text-slate-400 line-through">$999.990 + IVA</span>
               <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
             </div>
-            <div className="flex items-center justify-center gap-3 mt-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-3">
-              <img src="/mercadopago.svg" alt="Mercado Pago" className="h-8 w-auto flex-shrink-0" />
+            <p className="text-5xl sm:text-6xl font-extrabold gradient-text leading-none mb-1">$699.990</p>
+            <p className="text-slate-400 text-base mb-3">+ IVA</p>
+            <p className="text-white font-semibold text-base mb-5">Un solo pago, todo instalado. Sin sorpresas.</p>
+            <div className="flex items-center justify-center gap-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-5 py-4">
+              <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
               <div className="text-left">
-                <p className="text-sm font-bold text-white leading-tight">3 cuotas sin interés</p>
-                <p className="text-lg font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
+                <p className="text-sm text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
+                <p className="text-2xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/60">+ IVA / cuota</span></p>
               </div>
             </div>
           </div>
@@ -494,17 +496,17 @@ export default function Embudo1() {
             {/* Setup card */}
             <div className="pricing-highlight rounded-2xl p-8 relative overflow-hidden">
               <div className="absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full gradient-bg text-white">Más popular</div>
-              <p className="text-slate-400 text-sm mb-2">Setup único</p>
-              <div className="flex items-center gap-2 mb-1">
-                <span className="text-base text-slate-300 line-through font-medium">$999.990 + IVA</span>
+              <div className="flex items-center gap-2 mb-2">
+                <span className="text-base text-slate-400 line-through">$999.990 + IVA</span>
                 <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
               </div>
-              <p className="text-4xl font-extrabold text-white mb-1">$699.990 <span className="text-xl font-normal text-slate-400">+ IVA</span></p>
-              <div className="flex items-center gap-3 mb-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-3">
-                <img src="/mercadopago.svg" alt="Mercado Pago" className="h-8 w-auto flex-shrink-0" />
+              <p className="text-5xl font-extrabold gradient-text leading-none mb-1">$699.990</p>
+              <p className="text-slate-400 text-sm mb-2">+ IVA · Un solo pago, todo instalado.</p>
+              <div className="flex items-center gap-3 mb-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-4">
+                <img src="/mercadopago.svg" alt="Mercado Pago" className="h-9 w-auto flex-shrink-0" />
                 <div>
-                  <p className="text-sm font-bold text-white leading-tight">3 cuotas sin interés</p>
-                  <p className="text-lg font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
+                  <p className="text-xs text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
+                  <p className="text-xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/60">+ IVA / cuota</span></p>
                 </div>
               </div>
               <div className="flex items-center gap-1.5 mb-6">
