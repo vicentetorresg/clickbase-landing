@@ -32,9 +32,9 @@ const plans: Plan[] = [
     badge: 'Pago único',
     badgeType: 'one-time',
     name: 'Setup Inicial',
-    price: '$699.990',
+    price: '$799.990',
     originalPrice: '$999.990',
-    discountPct: 30,
+    discountPct: 20,
     cupos: 10,
     priceSuffix: '+ IVA',
     subtitle: 'Todo listo para empezar',
@@ -182,8 +182,8 @@ export default function Pricing() {
                   <div className="flex items-center gap-3 mb-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-3">
                     <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
                     <div>
-                      <p className="text-sm text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
-                      <p className="text-xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
+                      <p className="text-sm text-white/60 mb-0.5">o en 12 cuotas sin interés de</p>
+                      <p className="text-xl font-extrabold text-[#25D366] leading-tight">$66.666 <span className="text-sm font-normal text-white/70">+ IVA / cuota</span></p>
                     </div>
                   </div>
                 </div>

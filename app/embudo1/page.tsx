@@ -334,16 +334,16 @@ export default function Embudo1() {
             <p className="text-slate-400 text-sm mb-4">Todo lo que incluye el setup</p>
             <div className="flex items-center justify-center gap-2 mb-2">
               <span className="text-lg text-slate-400 line-through">$999.990 + IVA</span>
-              <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
+              <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−20%</span>
             </div>
-            <p className="text-5xl sm:text-6xl font-extrabold gradient-text leading-none mb-1">$699.990</p>
+            <p className="text-5xl sm:text-6xl font-extrabold gradient-text leading-none mb-1">$799.990</p>
             <p className="text-slate-400 text-base mb-3">+ IVA</p>
             <p className="text-white font-semibold text-base mb-5">Un solo pago, todo instalado. Sin sorpresas.</p>
             <div className="flex items-center justify-center gap-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-5 py-4">
               <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
               <div className="text-left">
-                <p className="text-sm text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
-                <p className="text-2xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/60">+ IVA / cuota</span></p>
+                <p className="text-sm text-white/60 mb-0.5">o en 12 cuotas sin interés de</p>
+                <p className="text-2xl font-extrabold text-[#25D366] leading-tight">$66.666 <span className="text-sm font-normal text-white/60">+ IVA / cuota</span></p>
               </div>
             </div>
           </div>
@@ -498,15 +498,15 @@ export default function Embudo1() {
               <div className="absolute top-4 right-4 text-xs font-bold px-2.5 py-1 rounded-full gradient-bg text-white">Más popular</div>
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-base text-slate-400 line-through">$999.990 + IVA</span>
-                <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−30%</span>
+                <span className="text-xs font-bold text-success bg-success/10 border border-success/25 rounded-full px-2 py-0.5">−20%</span>
               </div>
-              <p className="text-5xl font-extrabold gradient-text leading-none mb-1">$699.990</p>
+              <p className="text-5xl font-extrabold gradient-text leading-none mb-1">$799.990</p>
               <p className="text-slate-400 text-sm mb-2">+ IVA · Un solo pago, todo instalado.</p>
               <div className="flex items-center gap-3 mb-3 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-4 py-4">
                 <img src="/mercadopago.svg" alt="Mercado Pago" className="h-9 w-auto flex-shrink-0" />
                 <div>
-                  <p className="text-xs text-white/60 mb-0.5">o en 3 cuotas sin interés de</p>
-                  <p className="text-xl font-extrabold text-[#25D366] leading-tight">$233.330 <span className="text-sm font-normal text-white/60">+ IVA / cuota</span></p>
+                  <p className="text-xs text-white/60 mb-0.5">o en 12 cuotas sin interés de</p>
+                  <p className="text-xl font-extrabold text-[#25D366] leading-tight">$66.666 <span className="text-sm font-normal text-white/60">+ IVA / cuota</span></p>
                 </div>
               </div>
               <div className="flex items-center gap-1.5 mb-6">

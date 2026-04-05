@@ -7,7 +7,7 @@ const SERVICIOS_MAP: Record<string, { nombre: string; tipo: string; precio: numb
   setup: {
     nombre: 'Setup Inicial',
     tipo: 'one-time',
-    precio: 699990,
+    precio: 799990,
     precioOriginal: 999990,
     features: [
       'Diseño y desarrollo de landing page',

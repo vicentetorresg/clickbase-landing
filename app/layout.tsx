@@ -14,12 +14,12 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: 'Página Web + Google Ads + Tracking | ClickBase',
   description:
-    'Landing page de alta conversión + Google Ads o Meta Ads + GTM + Meta Pixel. Setup desde $699.990 + IVA. Base lista para captar leads. ClickBase.',
+    'Landing page de alta conversión + Google Ads o Meta Ads + GTM + Meta Pixel. Setup desde $799.990 + IVA. Base lista para captar leads. ClickBase.',
   metadataBase: new URL('https://clickbase.cl'),
   openGraph: {
     title: 'Página Web + Google Ads + Tracking | ClickBase',
     description:
-      'Landing page de alta conversión + Google Ads o Meta Ads + GTM + Meta Pixel. Setup desde $699.990 + IVA. Base lista para captar leads.',
+      'Landing page de alta conversión + Google Ads o Meta Ads + GTM + Meta Pixel. Setup desde $799.990 + IVA. Base lista para captar leads.',
     type: 'website',
     locale: 'es_CL',
     url: 'https://clickbase.cl',
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Página Web + Google Ads + Tracking | ClickBase',
     description:
-      'Landing page de alta conversión + Google Ads o Meta Ads + GTM + Meta Pixel. Setup desde $699.990 + IVA.',
+      'Landing page de alta conversión + Google Ads o Meta Ads + GTM + Meta Pixel. Setup desde $799.990 + IVA.',
     images: ['/opengraph-image'],
   },
   robots: {

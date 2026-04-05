@@ -9,7 +9,7 @@ const SERVICIOS = [
     id: 'setup',
     nombre: 'Setup Inicial',
     tipo: 'one-time',
-    precio: 699990,
+    precio: 799990,
     label: 'Pago único',
     descripcion: 'Landing + GTM + Pixel + campaña Google o Meta',
   },
