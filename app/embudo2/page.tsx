@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { fbq } from '@/lib/fbq'
 // WAModal removed — buttons go directly to WhatsApp
 
-const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
+const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20aumentar%20los%20clientes%20de%20mi%20empresa%20y%20necesito%20ayuda'
 
 function CTAButton({ text = 'Diagnosticar mi campaña gratis', size = 'lg', full = false, onClick }: { text?: string; size?: 'lg' | 'xl'; full?: boolean; onClick?: () => void }) {
   return (
