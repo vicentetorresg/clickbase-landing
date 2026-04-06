@@ -2,29 +2,109 @@
 
 import { useState } from 'react'
 import { fbq } from '@/lib/fbq'
-// WAModal removed — buttons go directly to WhatsApp
-
-const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
 
 const WAIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
-    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+    <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.849L.057 23.5a.5.5 0 0 0 .61.61l5.651-1.471A11.943 11.943 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.907 0-3.698-.528-5.228-1.449l-.374-.224-3.879 1.009 1.009-3.879-.224-.374A9.953 9.953 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
   </svg>
 )
 
-function WAButton({ text = 'Escribir por WhatsApp', full = false, onClick, href }: { text?: string; full?: boolean; onClick?: () => void; href: string }) {
+function CTAButton({ text = 'Quiero más clientes', full = false, onClick }: { text?: string; full?: boolean; onClick?: () => void }) {
   return (
-    <a
-      href={href}
-      rel="noopener"
+    <button
       onClick={onClick}
-      className={`inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-9 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 no-underline ${full ? 'w-full' : ''}`}
-      style={{ boxShadow: '0 0 28px rgba(37, 211, 102, 0.35)' }}
+      className={`btn-cta inline-flex items-center justify-center gap-2.5 font-bold px-7 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 text-white hover:brightness-110 hover:scale-105 ${full ? 'w-full' : ''}`}
+      style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 28px rgba(37,211,102,0.5), 0 4px 16px rgba(37,211,102,0.3)' }}
     >
       <WAIcon />
       {text}
-    </a>
+    </button>
+  )
+}
+
+function LeadModal({ source, onClose }: { source: string; onClose: () => void }) {
+  const [name, setName] = useState('')
+  const [phone, setPhone] = useState('')
+  const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+
+  async function handleSubmit(e: React.FormEvent) {
+    e.preventDefault()
+    setLoading(true)
+    await fetch('/api/lead-form', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, phone, source }),
+    }).catch(() => {})
+    fbq('track', 'Lead')
+    setSent(true)
+    setLoading(false)
+  }
+
+  return (
+    <div
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-28 sm:pb-4"
+      style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(4px)' }}
+      onClick={onClose}
+    >
+      <div
+        className="relative bg-[#12122A] border border-[rgba(124,58,237,0.3)] rounded-2xl p-6 w-full max-w-sm"
+        onClick={e => e.stopPropagation()}
+      >
+        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white text-lg leading-none">✕</button>
+        {sent ? (
+          <div className="text-center py-8">
+            <div className="text-5xl mb-4">💬</div>
+            <h3 className="text-white font-bold text-xl mb-2">¡Listo!</h3>
+            <p className="text-slate-400 text-sm">Te contactaremos por WhatsApp a la brevedad.</p>
+          </div>
+        ) : (
+          <>
+            <h3 className="text-white font-bold text-xl mb-1">¿Listo para aumentar tus clientes?</h3>
+            <p className="text-slate-400 text-sm mb-3">Déjanos tu número y te escribimos hoy por WhatsApp.</p>
+            <ul className="flex flex-col gap-1.5 mb-4">
+              {['Setup listo en 7 días', 'Tracking + landing + campaña'].map(item => (
+                <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
+                  <span className="text-green-400 text-xs">✓</span> {item}
+                </li>
+              ))}
+            </ul>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+              <input
+                required
+                value={name}
+                onChange={e => setName(e.target.value)}
+                name="name"
+                placeholder="Tu nombre"
+                autoComplete="name"
+                className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
+                style={{ fontSize: '16px' }}
+              />
+              <input
+                required
+                value={phone}
+                onChange={e => setPhone(e.target.value)}
+                name="tel"
+                placeholder="Tu WhatsApp"
+                type="tel"
+                autoComplete="tel"
+                className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
+                style={{ fontSize: '16px' }}
+              />
+              <button
+                type="submit"
+                disabled={loading}
+                className="btn-cta w-full inline-flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-white transition-all duration-200 disabled:opacity-60 mt-1"
+                style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
+              >
+                {loading ? 'Enviando...' : <><span>Te escribimos hoy</span> <WAIcon /></>}
+              </button>
+            </form>
+          </>
+        )}
+      </div>
+    </div>
   )
 }
 
@@ -101,23 +181,18 @@ const faqs = [
   },
 ]
 
-function StickyWACTA({ onClick, href }: { onClick: () => void; href: string }) {
+function StickyFormCTA({ onClick }: { onClick: () => void }) {
   return (
     <div className="md:hidden fixed bottom-0 left-0 right-0 z-50" style={{ background: 'linear-gradient(to top, rgba(8,8,15,0.98) 0%, rgba(8,8,15,0.9) 100%)', borderTop: '1px solid rgba(124,58,237,0.25)' }}>
       <div className="p-3 pb-safe">
-        <a
-          href={href}
-          rel="noopener"
+        <button
           onClick={onClick}
-          className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold py-3.5 rounded-xl text-sm transition-all duration-200 no-underline"
-          style={{ boxShadow: '0 0 16px rgba(37,211,102,0.3)' }}
+          className="btn-cta w-full flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-sm transition-all duration-200 text-white"
+          style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 28px rgba(37,211,102,0.5)' }}
         >
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-            <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
-          </svg>
+          <WAIcon />
           Quiero más clientes
-        </a>
+        </button>
       </div>
     </div>
   )
@@ -148,31 +223,31 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 }
 
 export default function Embudo1() {
-  function openModal() {
-    fbq('track', 'Lead')
-    const trackPayload = {
-      source: '/embudo1',
-      referrer: document.referrer || null,
-      user_agent: navigator.userAgent || null,
-    }
-    fetch('/api/track-click', {
+  const [showForm, setShowForm] = useState(false)
+
+  function openForm() {
+    setShowForm(true)
+    const params = new URLSearchParams(window.location.search)
+    fetch('/api/modal-open', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(trackPayload),
+      body: JSON.stringify({
+        title: 'Quiero más clientes',
+        source: '/embudo1',
+        referrer: document.referrer || null,
+        user_agent: navigator.userAgent,
+        utm_source: params.get('utm_source'),
+        utm_medium: params.get('utm_medium'),
+        utm_campaign: params.get('utm_campaign'),
+        utm_content: params.get('utm_content'),
+      }),
     }).catch(() => {})
-    fetch('/api/track-event', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ type: 'wa_click', ...trackPayload }),
-    }).catch(() => {})
-    window.location.href = 'whatsapp://send?phone=56955350255&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
-    setTimeout(() => {
-      window.location.href = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
-    }, 600)
   }
 
   return (
     <div className="min-h-screen bg-dark text-white">
+      {showForm && <LeadModal source="/embudo1" onClose={() => setShowForm(false)} />}
+
       {/* ── HEADER ──────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 border-b border-brand-purple/20 bg-dark/90 backdrop-blur-lg">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-4 flex items-center justify-between">
@@ -181,15 +256,12 @@ export default function Embudo1() {
             <span className="text-lg font-extrabold gradient-text">ClickBase</span>
           </a>
           <button
-            onClick={openModal}
-            className="flex items-center gap-2 text-sm font-bold text-[#25D366] border border-[#25D366]/30 hover:bg-[#25D366]/10 transition-colors duration-200 px-4 py-2 rounded-lg"
+            onClick={openForm}
+            className="btn-cta inline-flex items-center gap-2 text-sm font-bold text-white px-4 py-2 rounded-lg transition-all duration-200"
+            style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 16px rgba(37,211,102,0.4)' }}
           >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-              <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
-            </svg>
-            <span className="hidden sm:inline">+56 9 5535 0255</span>
-            <span className="sm:hidden">WhatsApp</span>
+            <WAIcon />
+            Quiero más clientes
           </button>
         </div>
       </header>
@@ -221,11 +293,23 @@ export default function Embudo1() {
           </h1>
 
           <p className="text-lg sm:text-xl text-slate-400 mb-10 max-w-2xl mx-auto leading-relaxed">
-            Web lista para convertir + Google o Meta Ads + tracking activo desde día 1. Todo en 7 días. Sin técnicos, sin contratos, sin meses de espera.
+            Web lista para convertir + Google o Meta Ads + tracking activo desde día 1. Todo en 7 días. Sin técnicos, sin meses de espera.
           </p>
 
+          {/* Social proof */}
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="flex -space-x-2">
+              {['#8B5CF6','#06B6D4','#EC4899','#10B981','#F59E0B'].map((c, i) => (
+                <div key={i} className="w-8 h-8 rounded-full border-2 border-dark flex items-center justify-center text-xs font-bold text-white" style={{ background: `linear-gradient(135deg, ${c}, #06B6D4)`, zIndex: 5 - i }}>
+                  {['A','V','R','M','J'][i]}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+          </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
+            <CTAButton text="Quiero más clientes" onClick={openForm} />
           </div>
 
           {/* Trust pills */}
@@ -323,7 +407,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center">
-            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
+            <CTAButton text="Quiero más clientes" onClick={openForm} />
           </div>
         </div>
       </section>
@@ -368,7 +452,7 @@ export default function Embudo1() {
             <p className="text-5xl sm:text-6xl font-extrabold gradient-text leading-none mb-1">$799.990</p>
             <p className="text-slate-400 text-base mb-3">+ IVA</p>
             <p className="text-white font-semibold text-base mb-5">Un solo pago, todo instalado. Sin sorpresas.</p>
-            <div className="flex items-center justify-center gap-4 bg-[#25D366]/10 border border-[#25D366]/30 rounded-xl px-5 py-4">
+            <div className="flex items-center justify-center gap-4 bg-[#25D366]/10 border border-[#25D366]/30] rounded-xl px-5 py-4">
               <img src="/mercadopago.svg" alt="Mercado Pago" className="h-10 w-auto flex-shrink-0" />
               <div className="text-left">
                 <p className="text-sm text-white/60 mb-0.5">o en 12 cuotas sin interés de</p>
@@ -417,7 +501,7 @@ export default function Embudo1() {
                 Yo instalo todo, lo dejo funcionando y te entrego listo para captar leads.{' '}
                 <strong className="text-white">Cada proyecto pasa por mis manos antes de entregarse.</strong>
               </p>
-              <WAButton text="Escribir directamente" href={WA_LINK} onClick={openModal} />
+              <CTAButton text="Quiero más clientes" onClick={openForm} />
             </div>
           </div>
         </div>
@@ -438,7 +522,7 @@ export default function Embudo1() {
             Escríbenos y en minutos te decimos cuánto cuesta y cuándo arrancamos.
             Sin formularios, sin reuniones previas, sin compromisos.
           </p>
-          <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
+          <CTAButton text="Quiero más clientes" onClick={openForm} />
         </div>
       </div>
 
@@ -512,7 +596,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center mt-12">
-            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
+            <CTAButton text="Quiero más clientes" onClick={openForm} />
           </div>
         </div>
       </section>
@@ -557,7 +641,7 @@ export default function Embudo1() {
                   </li>
                 ))}
               </ul>
-              <WAButton text="Quiero más clientes" href={WA_LINK} full onClick={openModal} />
+              <CTAButton text="Quiero más clientes" full onClick={openForm} />
             </div>
 
             {/* Mantención card */}
@@ -566,13 +650,13 @@ export default function Embudo1() {
               <p className="text-4xl font-extrabold text-white mb-1">$49.990</p>
               <p className="text-slate-500 text-xs mb-6">+ IVA · Opcional · Sin permanencia</p>
               <ul className="space-y-3 mb-8">
-                {['Monitoreo del tracking', 'Optimización mensual de campaña', 'Soporte WhatsApp prioritario', 'Ajustes menores a la landing', 'Reporte mensual de resultados', 'Sin contrato mínimo'].map((item) => (
+                {['Monitoreo del tracking', 'Optimización mensual de campaña', 'Soporte WhatsApp prioritario', 'Ajustes menores a la landing', 'Reporte mensual de resultados'].map((item) => (
                   <li key={item} className="flex items-center gap-2 text-sm text-slate-300">
                     <span className="text-brand-cyan">✓</span> {item}
                   </li>
                 ))}
               </ul>
-              <WAButton text="Consultar mantención" href={WA_LINK} full onClick={openModal} />
+              <CTAButton text="Quiero más clientes" full onClick={openForm} />
             </div>
           </div>
 
@@ -610,7 +694,7 @@ export default function Embudo1() {
           <p className="text-slate-400 mb-7 max-w-xl mx-auto">
             En 7 días tienes todo listo: web, campaña y tracking. Escríbenos y te cotizamos ahora.
           </p>
-          <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
+          <CTAButton text="Quiero más clientes" onClick={openForm} />
         </div>
       </div>
 
@@ -699,7 +783,7 @@ export default function Embudo1() {
 
           <div className="mt-8 p-5 rounded-2xl border border-brand-purple/30 bg-brand-purple/5 text-center">
             <p className="text-slate-300 text-sm">
-              ¿No ves tu industria? <a href={WA_LINK} onClick={openModal} className="text-brand-purple-light underline underline-offset-2 hover:text-white">Escríbenos</a> y te decimos si aplica para tu negocio.
+              ¿No ves tu industria? <button onClick={openForm} className="text-brand-purple-light underline underline-offset-2 hover:text-white">Escríbenos</button> y te decimos si aplica para tu negocio.
             </p>
           </div>
         </div>
@@ -742,21 +826,32 @@ export default function Embudo1() {
             Solo escríbenos hoy y en 7 días tienes todo funcionando.
           </p>
 
+          {/* Social proof */}
+          <div className="flex items-center justify-center gap-3 mb-5">
+            <div className="flex -space-x-2">
+              {['#8B5CF6','#06B6D4','#EC4899','#10B981','#F59E0B'].map((c, i) => (
+                <div key={i} className="w-8 h-8 rounded-full border-2 border-dark flex items-center justify-center text-xs font-bold text-white" style={{ background: `linear-gradient(135deg, ${c}, #06B6D4)`, zIndex: 5 - i }}>
+                  {['A','V','R','M','J'][i]}
+                </div>
+              ))}
+            </div>
+            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+          </div>
+
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
+            <CTAButton text="Quiero más clientes" onClick={openForm} />
           </div>
 
           <p className="text-slate-500 text-sm">
-            O escríbenos directo al{' '}
-            <a href={WA_LINK} onClick={openModal} className="text-[#25D366] hover:underline no-underline">
-              +56 9 5535 0255
-            </a>
+            O{' '}
+            <button onClick={openForm} className="text-brand-purple-light hover:underline underline-offset-2">Escríbenos aquí</button>
+            {' '}y te respondemos en minutos.
           </p>
         </div>
       </section>
 
       {/* ── STICKY MOBILE CTA ───────────────────────────────── */}
-      <StickyWACTA onClick={openModal} href={WA_LINK} />
+      <StickyFormCTA onClick={openForm} />
 
       {/* ── FOOTER ──────────────────────────────────────────── */}
       <footer className="border-t border-brand-purple/20 bg-dark-card/60 py-8 px-4 text-center">
