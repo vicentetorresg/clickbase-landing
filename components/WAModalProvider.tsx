@@ -95,40 +95,44 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
               <span className="text-xs font-bold text-[#A855F7] uppercase tracking-widest">¿Qué es ClickBase?</span>
             </div>
             <h3 className="text-white font-bold text-xl mb-1 text-center leading-snug">
-              Web + campaña + tracking.<br />
+              Tu negocio online, listo para<br />
               <span style={{ background: 'linear-gradient(135deg,#7C3AED,#06B6D4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Clientes desde el día 1.
+                conseguir clientes desde el día 1.
               </span>
             </h3>
-            <p className="text-slate-400 text-sm mb-4 text-center">Todo lo que necesita tu negocio para conseguir clientes online, sin depender de terceros.</p>
+            <p className="text-slate-400 text-sm mb-4 text-center">
+              Hacemos todo por ti: diseñamos tu web, lanzamos tus anuncios y configuramos el tracking para que cada peso invertido en publicidad se traduzca en clientes reales.
+            </p>
 
-            <ul className="flex flex-col gap-2 mb-4 bg-[#0e0e28] rounded-xl p-3">
+            <ul className="flex flex-col gap-2.5 mb-5 bg-[#0e0e28] rounded-xl p-3">
               {[
-                { icon: '🌐', text: 'Landing de alta conversión incluida' },
-                { icon: '📣', text: 'Campaña en Google Ads o Meta Ads' },
-                { icon: '📊', text: 'Pixel + GTM + tracking configurado' },
-                { icon: '💬', text: 'Leads llegan directo a tu WhatsApp' },
+                { icon: '🌐', label: 'Landing de alta conversión', desc: 'Diseñada para convertir visitas en contactos' },
+                { icon: '📣', label: 'Campaña en Google Ads o Meta Ads', desc: 'Configurada y lista para atraer clientes' },
+                { icon: '📊', label: 'Pixel + GTM + tracking completo', desc: 'Saber qué funciona y optimizar en tiempo real' },
+                { icon: '💬', label: 'Leads directo a tu WhatsApp', desc: 'Sin formularios perdidos ni correos sin leer' },
               ].map(item => (
-                <li key={item.text} className="flex items-center gap-2.5 text-sm text-slate-300">
-                  <span className="text-base leading-none">{item.icon}</span>
-                  <span>{item.text}</span>
+                <li key={item.label} className="flex items-start gap-2.5 text-sm text-slate-300">
+                  <span className="text-base leading-none mt-0.5">{item.icon}</span>
+                  <span>
+                    <span className="font-semibold text-white">{item.label}.</span>{' '}
+                    <span className="text-slate-400">{item.desc}.</span>
+                  </span>
                 </li>
               ))}
             </ul>
 
-            <div className="flex flex-col items-center gap-2 mt-2 bg-[#0e0e28] rounded-xl py-3 px-3">
-              <img src="/mercadopago.svg" alt="MercadoPago" className="h-8 w-auto" />
-              <span className="text-white text-sm font-bold text-center">Por solo 12 cuotas sin interés de $66.666 + IVA</span>
+            <div className="border-t border-[rgba(124,58,237,0.2)] pt-4">
+              <p className="text-center text-white font-bold text-base mb-1">¿Estás listo para conseguir más clientes?</p>
+              <p className="text-center text-slate-400 text-xs mb-3">Cuéntanos de tu negocio — sin compromiso.</p>
+              <button
+                onClick={() => setStep(1)}
+                className="btn-cta w-full inline-flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-white transition-all duration-200"
+                style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
+              >
+                Quiero más clientes →
+              </button>
+              <p className="text-center text-slate-600 text-xs mt-2">Sin compromiso · Cotización gratis</p>
             </div>
-
-            <button
-              onClick={() => setStep(1)}
-              className="btn-cta w-full inline-flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-white transition-all duration-200 mt-3"
-              style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
-            >
-              Me interesa, quiero cotizar →
-            </button>
-            <p className="text-center text-slate-600 text-xs mt-2">Sin compromiso · Cotización gratis</p>
           </div>
         ) : (
           /* Paso 2: formulario */

@@ -119,19 +119,16 @@ export async function POST(req: Request) {
     channel: 'lead_form',
   })
 
-  try {
-    await supabase.from('events').insert({
-      type: 'form_submit',
-      source: source || null,
-      user_agent: req.headers.get('user-agent') || null,
-    })
-  } catch (_) {}
+  // Disparar en background sin bloquear la respuesta
+  void supabase.from('events').insert({
+    type: 'form_submit',
+    source: source || null,
+    user_agent: req.headers.get('user-agent') || null,
+  })
 
-  try {
-    await sendMailViaAppsScript({ subject, body, html })
-  } catch (error) {
+  sendMailViaAppsScript({ subject, body, html }).catch((error) => {
     console.error('Apps Script lead email error (non-fatal):', error)
-  }
+  })
 
   return NextResponse.json({ ok: true })
 }
