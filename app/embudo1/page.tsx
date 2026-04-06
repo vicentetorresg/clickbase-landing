@@ -17,6 +17,7 @@ function WAButton({ text = 'Escribir por WhatsApp', full = false, onClick, href 
   return (
     <a
       href={href}
+      rel="noopener"
       onClick={onClick}
       className={`inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-9 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 no-underline ${full ? 'w-full' : ''}`}
       style={{ boxShadow: '0 0 28px rgba(37, 211, 102, 0.35)' }}
@@ -106,6 +107,7 @@ function StickyWACTA({ onClick, href }: { onClick: () => void; href: string }) {
       <div className="p-3 pb-safe">
         <a
           href={href}
+          rel="noopener"
           onClick={onClick}
           className="w-full flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold py-3.5 rounded-xl text-sm transition-all duration-200 no-underline"
           style={{ boxShadow: '0 0 16px rgba(37,211,102,0.3)' }}
@@ -163,6 +165,10 @@ export default function Embudo1() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'wa_click', ...trackPayload }),
     }).catch(() => {})
+    window.location.href = 'whatsapp://send?phone=56955350255&text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
+    setTimeout(() => {
+      window.location.href = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n'
+    }, 600)
   }
 
   return (
@@ -220,7 +226,7 @@ export default function Embudo1() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
-            <WAButton text="Quiero más clientes" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
           </div>
 
           {/* Trust pills */}
@@ -318,7 +324,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center">
-            <WAButton text="Quiero más clientes" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
           </div>
         </div>
       </section>
@@ -412,7 +418,7 @@ export default function Embudo1() {
                 Yo instalo todo, lo dejo funcionando y te entrego listo para captar leads.{' '}
                 <strong className="text-white">Cada proyecto pasa por mis manos antes de entregarse.</strong>
               </p>
-              <WAButton text="Escribir directamente" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+              <WAButton text="Escribir directamente" href={WA_LINK} onClick={openModal} />
             </div>
           </div>
         </div>
@@ -433,7 +439,7 @@ export default function Embudo1() {
             Escríbenos y en minutos te decimos cuánto cuesta y cuándo arrancamos.
             Sin formularios, sin reuniones previas, sin compromisos.
           </p>
-          <WAButton text="Quiero más clientes" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+          <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
         </div>
       </div>
 
@@ -507,7 +513,7 @@ export default function Embudo1() {
           </div>
 
           <div className="text-center mt-12">
-            <WAButton text="Quiero más clientes" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
           </div>
         </div>
       </section>
@@ -605,7 +611,7 @@ export default function Embudo1() {
           <p className="text-slate-400 mb-7 max-w-xl mx-auto">
             En 7 días tienes todo listo: web, campaña y tracking. Escríbenos y te cotizamos ahora.
           </p>
-          <WAButton text="Quiero más clientes" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+          <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
         </div>
       </div>
 
@@ -694,7 +700,7 @@ export default function Embudo1() {
 
           <div className="mt-8 p-5 rounded-2xl border border-brand-purple/30 bg-brand-purple/5 text-center">
             <p className="text-slate-300 text-sm">
-              ¿No ves tu industria? <a href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} className="text-brand-purple-light underline underline-offset-2 hover:text-white">Escríbenos</a> y te decimos si aplica para tu negocio.
+              ¿No ves tu industria? <a href={WA_LINK} onClick={openModal} className="text-brand-purple-light underline underline-offset-2 hover:text-white">Escríbenos</a> y te decimos si aplica para tu negocio.
             </p>
           </div>
         </div>
@@ -738,12 +744,12 @@ export default function Embudo1() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <WAButton text="Quiero más clientes" href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} />
+            <WAButton text="Quiero más clientes" href={WA_LINK} onClick={openModal} />
           </div>
 
           <p className="text-slate-500 text-sm">
             O escríbenos directo al{' '}
-            <a href={WA_LINK} target="_blank" rel="noopener noreferrer" onClick={openModal} className="text-[#25D366] hover:underline no-underline">
+            <a href={WA_LINK} onClick={openModal} className="text-[#25D366] hover:underline no-underline">
               +56 9 5535 0255
             </a>
           </p>
