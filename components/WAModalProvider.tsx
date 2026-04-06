@@ -64,7 +64,7 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4"
+      className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-28 sm:pb-4"
       style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(4px)' }}
       onClick={handleClose}
     >
@@ -72,9 +72,7 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
         className="relative bg-[#12122A] border border-[rgba(124,58,237,0.3)] rounded-2xl p-6 w-full max-w-sm max-h-[90vh] overflow-y-auto"
         onClick={e => e.stopPropagation()}
       >
-        {/* Header gradiente */}
         <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl" style={{ background: 'linear-gradient(90deg, #7C3AED, #06B6D4, #25D366)' }} />
-
         <button onClick={handleClose} className="absolute top-4 right-4 text-slate-500 hover:text-white text-lg leading-none z-10">✕</button>
 
         {sent ? (
@@ -88,22 +86,20 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
           </div>
         ) : (
           <div className="pt-3">
-            {/* Explicación */}
             <div className="flex items-center justify-center gap-2 mb-3">
               <span className="text-lg">⚡</span>
               <span className="text-xs font-bold text-[#A855F7] uppercase tracking-widest">¿Qué es ClickBase?</span>
             </div>
             <h3 className="text-white font-bold text-xl mb-1 text-center leading-snug">
-              Tu negocio online, listo para<br />
+              ¿Necesitas tener más clientes<br />
               <span style={{ background: 'linear-gradient(135deg,#7C3AED,#06B6D4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                conseguir clientes desde el día 1.
+                para tu negocio?
               </span>
             </h3>
             <p className="text-slate-400 text-sm mb-4 text-center">
               Hacemos todo por ti: diseñamos tu web, lanzamos tus anuncios y configuramos el tracking para que cada peso invertido en publicidad se traduzca en clientes reales.
             </p>
-
-            <ul className="flex flex-col gap-2.5 mb-5 bg-[#0e0e28] rounded-xl p-3">
+            <ul className="flex flex-col gap-2.5 mb-4 bg-[#0e0e28] rounded-xl p-3">
               {[
                 { icon: '🌐', label: 'Landing de alta conversión', desc: 'Diseñada para convertir visitas en contactos' },
                 { icon: '📣', label: 'Campaña en Google Ads o Meta Ads', desc: 'Configurada y lista para atraer clientes' },
@@ -118,11 +114,9 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
                 </li>
               ))}
             </ul>
-
-            {/* Formulario */}
             <div className="border-t border-[rgba(124,58,237,0.2)] pt-4">
-              <p className="text-center text-white font-bold text-xl mb-1">¿Te interesa? Déjanos tus datos</p>
-              <p className="text-center text-slate-200 text-xs mb-3">Te contactamos hoy por WhatsApp — sin compromiso.</p>
+              <p className="text-center text-white font-bold text-base mb-1">Déjanos tus datos</p>
+              <p className="text-center text-slate-400 text-xs mb-3">Te contactamos hoy por WhatsApp — sin compromiso.</p>
               <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input
                   required
@@ -131,7 +125,7 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
                   name="name"
                   placeholder="Tu nombre"
                   autoComplete="name"
-                  className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-300 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
+                  className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
                   style={{ fontSize: '16px' }}
                 />
                 <input
@@ -142,7 +136,7 @@ function LeadModal({ title, onClose, onAbandon }: { title: string; onClose: () =
                   placeholder="Ej: +56 9 1234 5678"
                   type="tel"
                   autoComplete="tel"
-                  className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-300 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
+                  className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
                   style={{ fontSize: '16px' }}
                 />
                 {error && <p className="text-red-400 text-xs -mt-1">{error}</p>}
@@ -170,7 +164,7 @@ export function WAModalProvider({ children }: { children: React.ReactNode }) {
   const utmRef = useState<Record<string, string | null>>(() => ({}))[0]
 
   function openModal(t?: string) {
-    const title = t || 'Quiero más clientes'
+    const title = (typeof t === 'string' ? t : null) || 'Quiero más clientes'
     setModalTitle(title)
     setShowModal(true)
     if (typeof window !== 'undefined') {

@@ -201,7 +201,7 @@ export default function Embudo1() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+50 empresas</span> ya generan clientes con ClickBase</p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
@@ -731,7 +731,7 @@ export default function Embudo1() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+50 empresas</span> ya generan clientes con ClickBase</p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">

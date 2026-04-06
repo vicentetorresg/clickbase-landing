@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { fbq } from '@/lib/fbq'
+import { useOpenWAModal } from '@/components/WAModalProvider'
 
 const WAIcon = () => (
   <svg width="22" height="22" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
@@ -23,155 +23,6 @@ function CTAButton({ text = 'Quiero más clientes', full = false, onClick }: { t
   )
 }
 
-const Spinner = () => (
-  <svg className="animate-spin" width="18" height="18" viewBox="0 0 24 24" fill="none">
-    <circle cx="12" cy="12" r="10" stroke="white" strokeWidth="3" strokeOpacity="0.3"/>
-    <path d="M12 2a10 10 0 0 1 10 10" stroke="white" strokeWidth="3" strokeLinecap="round"/>
-  </svg>
-)
-
-function LeadModal({ source, onClose }: { source: string; onClose: () => void }) {
-  const [step, setStep] = useState<0 | 1>(0)
-  const [name, setName] = useState('')
-  const [phone, setPhone] = useState('')
-  const [sent, setSent] = useState(false)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-
-  async function handleSubmit(e: React.FormEvent) {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
-    try {
-      let utms: Record<string, string> = {}
-      try {
-        const stored = sessionStorage.getItem('cb_utms')
-        if (stored) utms = JSON.parse(stored)
-      } catch {}
-
-      const res = await fetch('/api/lead-form', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, phone, source, ...utms }),
-      })
-      if (!res.ok) throw new Error()
-      fbq('track', 'Lead')
-      setSent(true)
-    } catch {
-      setError('Hubo un error al enviar. Intenta de nuevo o escríbenos directo.')
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  return (
-    <div
-      className="fixed inset-0 z-[60] flex items-center justify-center p-4 pb-28 sm:pb-4"
-      style={{ background: 'rgba(0,0,0,0.85)', backdropFilter: 'blur(4px)' }}
-      onClick={onClose}
-    >
-      <div
-        className="relative bg-[#12122A] border border-[rgba(124,58,237,0.3)] rounded-2xl p-6 w-full max-w-sm"
-        onClick={e => e.stopPropagation()}
-      >
-        <div className="absolute top-0 left-0 right-0 h-1.5 rounded-t-2xl" style={{ background: 'linear-gradient(90deg, #7C3AED, #06B6D4, #25D366)' }} />
-        <button onClick={onClose} className="absolute top-4 right-4 text-slate-500 hover:text-white text-lg leading-none z-10">✕</button>
-        {sent ? (
-          <div className="text-center py-10">
-            <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4" style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 32px rgba(37,211,102,0.5)' }}>
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none"><path d="M5 13l4 4L19 7" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/></svg>
-            </div>
-            <h3 className="text-white font-bold text-xl mb-2">¡Listo, {name.split(' ')[0]}!</h3>
-            <p className="text-slate-300 text-sm mb-1">Te escribimos por WhatsApp <strong className="text-white">hoy mismo</strong>.</p>
-            <p className="text-slate-500 text-xs mt-2">Revisa tu WhatsApp en los próximos minutos.</p>
-          </div>
-        ) : step === 0 ? (
-          /* Paso 1: qué es ClickBase */
-          <div className="pt-3">
-            <div className="flex items-center justify-center gap-2 mb-3">
-              <span className="text-lg">⚡</span>
-              <span className="text-xs font-bold text-[#A855F7] uppercase tracking-widest">¿Qué es ClickBase?</span>
-            </div>
-            <h3 className="text-white font-bold text-xl mb-1 text-center leading-snug">
-              Web + campaña + tracking.<br />
-              <span style={{ background: 'linear-gradient(135deg,#7C3AED,#06B6D4)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-                Clientes desde el día 1.
-              </span>
-            </h3>
-            <p className="text-slate-400 text-sm mb-4 text-center">Todo lo que necesita tu negocio para conseguir clientes online, sin depender de terceros.</p>
-            <ul className="flex flex-col gap-2 mb-4 bg-[#0e0e28] rounded-xl p-3">
-              {[
-                { icon: '🌐', text: 'Landing de alta conversión incluida' },
-                { icon: '📣', text: 'Campaña en Google Ads o Meta Ads' },
-                { icon: '📊', text: 'Pixel + GTM + tracking configurado' },
-                { icon: '💬', text: 'Leads llegan directo a tu WhatsApp' },
-              ].map(item => (
-                <li key={item.text} className="flex items-center gap-2.5 text-sm text-slate-300">
-                  <span className="text-base leading-none">{item.icon}</span>
-                  <span>{item.text}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="flex flex-col items-center gap-2 mt-2 bg-[#0e0e28] rounded-xl py-3 px-3">
-              <img src="/mercadopago.svg" alt="MercadoPago" className="h-8 w-auto" />
-              <span className="text-white text-sm font-bold text-center">Por solo 12 cuotas sin interés de $66.666 + IVA</span>
-            </div>
-            <button
-              onClick={() => setStep(1)}
-              className="btn-cta w-full inline-flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-white transition-all duration-200 mt-3"
-              style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
-            >
-              Me interesa, quiero cotizar →
-            </button>
-            <p className="text-center text-slate-600 text-xs mt-2">Sin compromiso · Cotización gratis</p>
-          </div>
-        ) : (
-          /* Paso 2: formulario */
-          <div className="pt-3">
-            <button onClick={() => setStep(0)} className="flex items-center gap-1 text-slate-500 hover:text-slate-300 text-xs mb-3 transition-colors">
-              ← Volver
-            </button>
-            <h3 className="text-white font-bold text-xl mb-1 text-center">Déjanos tus datos</h3>
-            <p className="text-slate-400 text-sm mb-4 text-center">Te contactamos hoy por WhatsApp.</p>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-              <input
-                required
-                value={name}
-                onChange={e => setName(e.target.value)}
-                name="name"
-                placeholder="Tu nombre"
-                autoComplete="name"
-                className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
-                style={{ fontSize: '16px' }}
-              />
-              <input
-                required
-                value={phone}
-                onChange={e => setPhone(e.target.value)}
-                name="tel"
-                placeholder="Ej: +56 9 1234 5678"
-                type="tel"
-                autoComplete="tel"
-                className="bg-[#1a1a3a] border border-slate-700 rounded-xl px-4 py-3 text-white text-sm placeholder-slate-500 focus:outline-none focus:border-[rgba(124,58,237,0.6)]"
-                style={{ fontSize: '16px' }}
-              />
-              {error && <p className="text-red-400 text-xs -mt-1">{error}</p>}
-              <button
-                type="submit"
-                disabled={loading}
-                className="btn-cta w-full inline-flex items-center justify-center gap-2 font-bold py-3.5 rounded-xl text-white transition-all duration-200 disabled:opacity-60 mt-1"
-                style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
-              >
-                {loading ? <><Spinner /> Enviando...</> : <><span>Quiero más clientes</span> <WAIcon /></>}
-              </button>
-              <p className="text-center text-slate-600 text-xs -mt-1">🔒 Sin compromisos · Respuesta hoy</p>
-            </form>
-          </div>
-        )}
-      </div>
-    </div>
-  )
-}
 
 const StarIcon = () => (
   <svg width="16" height="16" viewBox="0 0 20 20" fill="#F59E0B">
@@ -302,30 +153,10 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 
 export default function Embudo2() {
-  const [showForm, setShowForm] = useState(false)
-
-  function openForm() {
-    setShowForm(true)
-    const params = new URLSearchParams(window.location.search)
-    fetch('/api/modal-open', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        title: 'Quiero más clientes',
-        source: '/embudo2',
-        referrer: document.referrer || null,
-        user_agent: navigator.userAgent,
-        utm_source: params.get('utm_source'),
-        utm_medium: params.get('utm_medium'),
-        utm_campaign: params.get('utm_campaign'),
-        utm_content: params.get('utm_content'),
-      }),
-    }).catch(() => {})
-  }
+  const openForm = useOpenWAModal()
 
   return (
     <div className="min-h-screen bg-dark text-white">
-      {showForm && <LeadModal source="/embudo2" onClose={() => setShowForm(false)} />}
 
       {/* ── HEADER ──────────────────────────────────────────── */}
       <header className="sticky top-0 z-50 border-b border-brand-purple/20 bg-dark/90 backdrop-blur-lg">
@@ -379,7 +210,7 @@ export default function Embudo2() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+50 empresas</span> ya generan clientes con ClickBase</p>
           </div>
 
           {/* CTA — protagonista */}
@@ -897,7 +728,7 @@ export default function Embudo2() {
                 </div>
               ))}
             </div>
-            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+            <p className="text-sm text-slate-300"><span className="text-white font-semibold">+50 empresas</span> ya generan clientes con ClickBase</p>
           </div>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">

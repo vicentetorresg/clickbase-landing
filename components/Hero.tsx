@@ -54,7 +54,7 @@ export default function Hero() {
                   </div>
                 ))}
               </div>
-              <p className="text-sm text-slate-300"><span className="text-white font-semibold">+47 empresas</span> ya generan clientes con ClickBase</p>
+              <p className="text-sm text-slate-300"><span className="text-white font-semibold">+50 empresas</span> ya generan clientes con ClickBase</p>
             </div>
 
             {/* CTAs */}
