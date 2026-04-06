@@ -16,14 +16,15 @@ const WAIcon = () => (
 
 function WAButton({ text = 'Escribir por WhatsApp', full = false, onClick }: { text?: string; full?: boolean; onClick?: () => void }) {
   return (
-    <button
+    <a
+      href={WA_LINK}
       onClick={onClick}
-      className={`inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-9 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 ${full ? 'w-full' : ''}`}
+      className={`inline-flex items-center justify-center gap-2.5 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-9 py-4 rounded-xl text-base transition-all duration-200 active:scale-95 no-underline ${full ? 'w-full' : ''}`}
       style={{ boxShadow: '0 0 28px rgba(37, 211, 102, 0.35)' }}
     >
       <WAIcon />
       {text}
-    </button>
+    </a>
   )
 }
 
@@ -162,12 +163,6 @@ export default function Embudo1() {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ type: 'wa_click', ...trackPayload }),
     }).catch(() => {})
-    const isWebView = /FBAN|FBAV|Instagram|FB_IAB|FB4A|FBIOS|webview|wv/i.test(navigator.userAgent)
-    if (isWebView) {
-      window.location.href = WA_LINK_APP
-    } else {
-      window.open(WA_LINK, '_blank')
-    }
   }
 
   return (
