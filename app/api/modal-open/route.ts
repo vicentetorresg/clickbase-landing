@@ -1,4 +1,5 @@
 import { NextResponse } from 'next/server'
+import { supabase } from '@/lib/supabase'
 import { sendMailViaAppsScript } from '@/lib/apps-script-mail'
 
 function getDeviceLabel(input?: string | null) {
@@ -116,6 +117,15 @@ export async function POST(req: Request) {
     </body>
     </html>
   `
+
+  try {
+    await supabase.from('events').insert({
+      type: 'modal_open',
+      source: source || null,
+      referrer: utmSummary || referrer || null,
+      user_agent: effectiveUserAgent,
+    })
+  } catch (_) {}
 
   await sendMailViaAppsScript({ subject, body, html }).catch(() => {})
 
