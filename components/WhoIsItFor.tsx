@@ -88,7 +88,8 @@ export default function WhoIsItFor() {
           </p>
           <a
             href="#contacto"
-            className="inline-flex items-center gap-2 gradient-bg text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 hover:shadow-glow-purple"
+            className="btn-cta inline-flex items-center gap-2 text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 hover:brightness-110 hover:scale-105"
+            style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
           >
             Cotizar sin compromiso →
           </a>

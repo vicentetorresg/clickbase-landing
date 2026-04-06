@@ -4,10 +4,22 @@ import { supabase } from '@/lib/supabase'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
 
+function getDeviceLabel(input?: string | null) {
+  if (!input) return null
+  if (/iPhone|iPad|iPod/i.test(input)) return '📱 iOS'
+  if (/Android/i.test(input)) return '📱 Android'
+  if (/Windows/i.test(input)) return '💻 Windows'
+  if (/Macintosh|Mac OS X|MacIntel|MacPPC|Mac68K|\bMac\b/i.test(input)) return '💻 Mac'
+  if (/mobile/i.test(input)) return '📱 Mobile'
+  if (/desktop/i.test(input)) return '💻 Escritorio'
+  return input
+}
+
 export async function POST(req: Request) {
-  const { name, email, phone, rubro, budget, source } = await req.json()
+  const { name, email, phone, rubro, budget, source, device, user_agent, utm_source, utm_medium, utm_campaign, utm_content } = await req.json()
 
   const now = new Date().toLocaleString('es-CL', { timeZone: 'America/Santiago' })
+  const deviceLabel = getDeviceLabel(device || user_agent || req.headers.get('user-agent'))
 
   try {
     await supabase.from('events').insert({
@@ -68,11 +80,23 @@ export async function POST(req: Request) {
                 </td>
               </tr>
               <tr>
-                <td style="padding:10px 0;">
+                <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
                   <span style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;">Fuente</span>
                   <div style="font-size:13px;font-weight:600;color:#64748b;margin-top:3px;">${source || '/'}</div>
                 </td>
               </tr>
+              ${deviceLabel ? `<tr>
+                <td style="padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+                  <span style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;">Dispositivo</span>
+                  <div style="font-size:13px;font-weight:600;color:#e2e8f0;margin-top:3px;">${deviceLabel}</div>
+                </td>
+              </tr>` : ''}
+              ${utm_campaign || utm_source ? `<tr>
+                <td style="padding:10px 0;">
+                  <span style="font-size:11px;color:#64748b;text-transform:uppercase;letter-spacing:0.05em;">UTM</span>
+                  <div style="font-size:13px;font-weight:600;color:#A855F7;margin-top:3px;">${[utm_campaign, utm_source, utm_medium, utm_content].filter(Boolean).join(' · ')}</div>
+                </td>
+              </tr>` : ''}
             </table>
           </div>
           <p style="text-align:center;font-size:10px;color:#1e293b;margin-top:16px;">⚡ ClickBase · clickbase.cl</p>

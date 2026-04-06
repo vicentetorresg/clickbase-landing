@@ -170,15 +170,17 @@ export default function FAQ() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <a
               href="#contacto"
-              className="gradient-bg text-white font-bold px-8 py-4 rounded-xl hover:opacity-90 transition-all duration-200 hover:shadow-glow-purple text-center"
+              className="btn-cta text-white font-bold px-8 py-4 rounded-xl transition-all duration-200 hover:brightness-110 hover:scale-105 text-center"
+              style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
             >
               Cotizar ahora
             </a>
             <button
-              onClick={openModal}
-              className="flex items-center justify-center gap-2 border border-slate-600 text-white font-bold px-8 py-4 rounded-xl hover:border-slate-400 hover:bg-white/5 transition-all duration-200"
+              onClick={() => openModal()}
+              className="btn-cta inline-flex items-center font-bold px-7 py-3.5 rounded-xl transition-all duration-200 text-sm text-white hover:brightness-110 hover:scale-105"
+              style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
             >
-              💬 Preguntar por WhatsApp
+              Tengo una pregunta →
             </button>
           </div>
         </div>

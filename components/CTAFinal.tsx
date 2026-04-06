@@ -1,24 +1,21 @@
 'use client'
 
 import { useState } from 'react'
-import { useOpenWAModal } from '@/components/WAModalProvider'
+import { fbq } from '@/lib/fbq'
 
 type FormData = {
   nombre: string
   email: string
-  rubro: string
-  whatsapp: string
+  phone: string
 }
 
 const initialFormData: FormData = {
   nombre: '',
   email: '',
-  rubro: '',
-  whatsapp: '',
+  phone: '',
 }
 
 export default function CTAFinal() {
-  const openModal = useOpenWAModal()
   const [formData, setFormData] = useState<FormData>(initialFormData)
   const [submitted, setSubmitted] = useState(false)
   const [loading, setLoading] = useState(false)
@@ -48,36 +45,47 @@ export default function CTAFinal() {
     pushEvent({ event: 'form_submit_attempt', form_location: 'cta_final' })
 
     try {
-      const res = await fetch('/api/submit', {
+      // Leer UTMs desde sessionStorage (guardados por AnalyticsTracker)
+      let utms: Record<string, string> = {}
+      try {
+        const stored = sessionStorage.getItem('cb_utms')
+        if (stored) utms = JSON.parse(stored)
+      } catch {}
+
+      // Detectar dispositivo
+      const device = /Mobi|Android|iPhone|iPad/i.test(navigator.userAgent) ? 'mobile' : 'desktop'
+
+      const res = await fetch('/api/lead-form', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          ...formData,
+          name: formData.nombre,
+          email: formData.email,
+          phone: formData.phone,
           source: window.location.pathname,
-          referrer: document.referrer || null,
+          device,
+          ...utms,
         }),
       })
 
-      const result = await res.json()
-
-      if (!result.success) {
-        throw new Error(result.error || 'Error al enviar')
+      if (!res.ok) {
+        throw new Error('Error al enviar')
       }
 
       // ✅ Evento principal de conversión — úsalo en GTM como activador
       pushEvent({
         event: 'lead_generado',
         form_location: 'cta_final',
-        rubro: formData.rubro,
       })
 
+      fbq('track', 'Lead')
       setSubmitted(true)
       setFormData(initialFormData)
     } catch (err) {
       setError(
         err instanceof Error
           ? err.message
-          : 'Hubo un error. Intenta por WhatsApp.'
+          : 'Hubo un error. Intenta de nuevo.'
       )
     } finally {
       setLoading(false)
@@ -115,29 +123,8 @@ export default function CTAFinal() {
               Sin tecnicismos, sin presión. Solo una conversación honesta sobre tu negocio.
             </p>
 
-            {/* WhatsApp button — primary CTA */}
-            <button
-              onClick={() => {
-                pushEvent({ event: 'whatsapp_click', location: 'cta_final' })
-                openModal()
-              }}
-              className="inline-flex items-center gap-3 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-7 py-4 rounded-xl transition-all duration-200 text-base mb-3 w-full sm:w-auto justify-center sm:justify-start"
-              style={{ boxShadow: '0 0 24px rgba(37, 211, 102, 0.3)' }}
-            >
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z" />
-                <path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.118 1.528 5.848L.057 23.5c-.07.27.057.553.298.634.068.024.139.035.208.035.177 0 .35-.074.474-.212l5.792-5.792A11.94 11.94 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.817 9.817 0 01-5.217-1.494L3.5 22l1.703-3.2A9.78 9.78 0 012.182 12C2.182 6.572 6.572 2.182 12 2.182S21.818 6.572 21.818 12 17.428 21.818 12 21.818z" />
-              </svg>
-              Hablar por WhatsApp ahora
-            </button>
-
-            <p className="text-sm text-[#25D366] font-medium mb-8 flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#25D366] animate-pulse inline-block" />
-              Te respondemos en minutos
-            </p>
-
             {/* Trust badges */}
-            <div className="flex flex-wrap gap-3">
+            <div className="flex flex-wrap gap-3 mb-8">
               {['Sin compromiso', 'Respuesta rápida', 'Propuesta a medida'].map((badge) => (
                 <span
                   key={badge}
@@ -154,7 +141,7 @@ export default function CTAFinal() {
               <h3 className="text-base font-bold text-white mb-4">¿Cómo funciona?</h3>
               <ol className="space-y-3">
                 {[
-                  'Escríbenos por WhatsApp o llena el formulario',
+                  'Llena el formulario con tus datos',
                   'Revisamos tu caso y te orientamos sin compromiso',
                   'Preparamos una propuesta a medida para tu negocio',
                   'Empezamos cuando estés listo',
@@ -170,31 +157,22 @@ export default function CTAFinal() {
             </div>
           </div>
 
-          {/* RIGHT COLUMN - Form (secondary) */}
+          {/* RIGHT COLUMN - Form */}
           <div>
             <p className="text-sm text-slate-500 mb-3 text-center sm:text-left">
-              Si prefieres, también puedes dejar tus datos y te contactamos.
+              Deja tus datos y te contactamos hoy mismo.
             </p>
             <div className="card-dark rounded-2xl p-6 sm:p-8 border border-slate-800/60">
               {submitted ? (
                 /* Success state */
                 <div className="text-center py-12">
-                  <div className="text-6xl mb-6">✅</div>
+                  <div className="text-6xl mb-6">💬</div>
                   <h3 className="text-2xl font-extrabold text-white mb-4">
-                    ¡Listo! Te contactamos pronto.
+                    ¡Listo!
                   </h3>
                   <p className="text-slate-400 mb-6">
-                    Recibimos tu solicitud. Te enviamos una propuesta en menos
-                    de 24 horas hábiles.
+                    Te contactaremos por WhatsApp a la brevedad.
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                    <button
-                      onClick={openModal}
-                      className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold px-6 py-3 rounded-xl transition-all duration-200 text-sm"
-                    >
-                      💬 También puedes escribirnos por WhatsApp
-                    </button>
-                  </div>
                 </div>
               ) : (
                 /* Form */
@@ -216,6 +194,7 @@ export default function CTAFinal() {
                         onChange={handleChange}
                         required
                         placeholder="Tu nombre completo"
+                        autoComplete="name"
                         className={inputClass}
                       />
                     </div>
@@ -232,38 +211,24 @@ export default function CTAFinal() {
                         onChange={handleChange}
                         required
                         placeholder="tu@email.com"
+                        autoComplete="email"
                         className={inputClass}
                       />
                     </div>
 
-                    {/* Rubro */}
+                    {/* Teléfono */}
                     <div>
                       <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                        Rubro <span className="text-brand-purple-light">*</span>
-                      </label>
-                      <input
-                        type="text"
-                        name="rubro"
-                        value={formData.rubro}
-                        onChange={handleChange}
-                        required
-                        placeholder="Ej: Clínica, inmobiliaria, abogados..."
-                        className={inputClass}
-                      />
-                    </div>
-
-                    {/* WhatsApp */}
-                    <div>
-                      <label className="block text-sm font-medium text-slate-300 mb-1.5">
-                        WhatsApp <span className="text-brand-purple-light">*</span>
+                        Teléfono <span className="text-brand-purple-light">*</span>
                       </label>
                       <input
                         type="tel"
-                        name="whatsapp"
-                        value={formData.whatsapp}
+                        name="phone"
+                        value={formData.phone}
                         onChange={handleChange}
                         required
-                        placeholder="+56 9 XXXX XXXX"
+                        placeholder="Tu teléfono"
+                        autoComplete="tel"
                         className={inputClass}
                       />
                     </div>
@@ -281,11 +246,10 @@ export default function CTAFinal() {
                     type="submit"
                     disabled={loading}
                     onClick={() => pushEvent({ event: 'cta_submit_click', location: 'form' })}
-                    className={`w-full gradient-bg text-white font-bold py-4 px-8 rounded-xl text-base mt-6 transition-all duration-200 flex items-center justify-center gap-2 ${
-                      loading
-                        ? 'opacity-70 cursor-not-allowed'
-                        : 'hover:opacity-90 hover:shadow-glow-purple'
+                    className={`btn-cta w-full text-white font-bold py-4 px-8 rounded-xl text-base mt-6 transition-all duration-200 flex items-center justify-center gap-2 ${
+                      loading ? 'opacity-70 cursor-not-allowed' : 'hover:brightness-110 hover:scale-105'
                     }`}
+                    style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 28px rgba(37,211,102,0.5)' }}
                   >
                     {loading ? (
                       <>

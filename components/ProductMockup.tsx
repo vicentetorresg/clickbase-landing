@@ -242,7 +242,8 @@ export default function ProductMockup() {
             <div className="pt-4">
               <a
                 href="#precios"
-                className="inline-flex items-center gap-2 gradient-bg text-white font-bold px-6 py-3.5 rounded-xl hover:opacity-90 transition-all duration-200 hover:shadow-glow-purple text-sm"
+                className="btn-cta inline-flex items-center gap-2 text-white font-bold px-6 py-3.5 rounded-xl transition-all duration-200 hover:brightness-110 hover:scale-105 text-sm"
+                style={{ background: 'linear-gradient(135deg, #1DA851, #25D366)', boxShadow: '0 0 24px rgba(37,211,102,0.4)' }}
               >
                 Ver precios del setup completo →
               </a>
