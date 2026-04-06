@@ -5,6 +5,7 @@ import { fbq } from '@/lib/fbq'
 // WAModal removed — buttons go directly to WhatsApp
 
 const WA_LINK = 'https://wa.me/56955350255?text=Hola%2C%20quiero%20aumentar%20los%20clientes%20de%20mi%20empresa%20y%20necesito%20ayuda'
+const WA_LINK_APP = 'whatsapp://send?phone=56955350255&text=Hola%2C%20quiero%20aumentar%20los%20clientes%20de%20mi%20empresa%20y%20necesito%20ayuda'
 
 const WAIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" className="flex-shrink-0">
@@ -176,7 +177,7 @@ export default function Embudo2() {
     }).catch(() => {})
     const isWebView = /FBAN|FBAV|Instagram|FB_IAB|FB4A|FBIOS|webview|wv/i.test(navigator.userAgent)
     if (isWebView) {
-      window.location.href = WA_LINK
+      window.location.href = WA_LINK_APP
     } else {
       window.open(WA_LINK, '_blank')
     }
