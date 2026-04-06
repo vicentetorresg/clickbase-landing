@@ -153,7 +153,8 @@ function FAQItem({ q, a }: { q: string; a: string }) {
 
 
 export default function Embudo2() {
-  const openForm = useOpenWAModal()
+  const _openModal = useOpenWAModal()
+  const openForm = () => _openModal()
 
   return (
     <div className="min-h-screen bg-dark text-white">
