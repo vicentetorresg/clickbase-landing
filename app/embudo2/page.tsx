@@ -229,25 +229,6 @@ export default function Embudo2() {
         </div>
       </section>
 
-      {/* ── BEFORE / AFTER STATS ────────────────────────────── */}
-      <section className="py-12 border-y border-brand-purple/10">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
-            {[
-              { number: '80%', label: 'de negocios con tracking mal instalado' },
-              { number: '-50%', label: 'Caída en CPL al corregir el setup' },
-              { number: '7', label: 'Días para relanzar correctamente' },
-              { number: '100%', label: 'Visibilidad de resultados desde día 1' },
-            ].map((stat) => (
-              <div key={stat.label}>
-                <p className="text-3xl sm:text-4xl font-extrabold gradient-text mb-1">{stat.number}</p>
-                <p className="text-xs sm:text-sm text-slate-400">{stat.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── PROBLEM DIAGNOSIS ───────────────────────────────── */}
       <section className="py-20 lg:py-28 relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(124,58,237,0.05) 0%, transparent 60%)' }} />
