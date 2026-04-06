@@ -1,4 +1,4 @@
-const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbySihM8c3LDUQkWdIWmKul3I0a0a2eSYpEldKBC-VmS-7oip3_5Bv5qEKo8ds-qPGWMcw/exec'
+const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxGi9HPOKY4W0jTKs0NmAuCVDau1GyDUeQOaVrJY6li07Ye1AAAo4jTyA22cNOPLfd78A/exec'
 
 type AppsScriptMail = {
   subject: string
@@ -15,5 +15,11 @@ export async function sendMailViaAppsScript(payload: AppsScriptMail) {
 
   if (!res.ok) {
     throw new Error(`Apps Script mail error: ${res.status}`)
+  }
+
+  const result = await res.json().catch(() => null)
+
+  if (result && result.ok === false) {
+    throw new Error(result.error || 'Apps Script mail error')
   }
 }
